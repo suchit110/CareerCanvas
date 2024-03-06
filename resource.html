@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placement Resources</title>
+    <style>
+        body {
+            font-family: "Arial", sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .resource-category {
+            margin-bottom: 20px;
+        }
+
+        .resource-category h2 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .resource-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .resource-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .resource-item:hover {
+            transform: scale(1.05);
+        }
+
+        .resource-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .resource-item {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Placement Resources</h1>
+
+    <div class="resource-category">
+        <h2>Interview Questions</h2>
+        <ul class="resource-list" id="interviewQuestionsList"></ul>
+    </div>
+
+    <div class="resource-category">
+        <h2>Study Materials</h2>
+        <ul class="resource-list" id="studyMaterialsList"></ul>
+    </div>
+
+    <div class="resource-category">
+        <h2>Online Platforms</h2>
+        <ul class="resource-list" id="onlinePlatformsList"></ul>
+    </div>
+
+    <script>
+        try {
+            const interviewQuestionsData = [
+                { title: 'Technical Interview Questions', link: 'https://example.com/technical-interview' },
+                { title: 'Behavioral Interview Questions', link: 'https://example.com/behavioral-interview' },
+                { title: 'Common Interview Questions', link: 'https://example.com/common-interview' },
+            ];
+
+            const studyMaterialsData = [
+                { title: 'Programming Basics', link: 'https://example.com/programming-basics' },
+                { title: 'Data Structures and Algorithms', link: 'https://example.com/data-structures-algorithms' },
+                { title: 'Resume Writing Guide', link: 'https://example.com/resume-writing' },
+            ];
+
+            const onlinePlatformsData = [
+                { title: 'LeetCode', link: 'https://leetcode.com/' },
+                { title: 'HackerRank', link: 'https://www.hackerrank.com/' },
+                { title: 'Coursera', link: 'https://www.coursera.org/' },
+            ];
+
+            function createResourceList(containerId, data) {
+                const container = document.getElementById(containerId);
+                if (!container) throw new Error(`Container with id '${containerId}' not found.`);
+
+                const list = document.createElement('ul');
+                list.classList.add('resource-list');
+
+                data.forEach(resource => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('resource-item');
+
+                    const link = document.createElement('a');
+                    link.href = resource.link;
+                    link.textContent = resource.title;
+
+                    listItem.appendChild(link);
+                    list.appendChild(listItem);
+                });
+
+                container.appendChild(list);
+            }
+
+            createResourceList('interviewQuestionsList', interviewQuestionsData);
+            createResourceList('studyMaterialsList', studyMaterialsData);
+            createResourceList('onlinePlatformsList', onlinePlatformsData);
+        } catch (error) {
+            console.error('An error occurred:', error.message);
+        }
+    </script>
+</body>
+
+</html>

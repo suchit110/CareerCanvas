@@ -169,7 +169,7 @@ p {
     color: #fff; }
   .main-btn.main-btn-2 {
     background-color: #e8f9ff;
-    color: #3dbeee;
+    color: #526d82;
     border-color: #e8f9ff; }
     .main-btn.main-btn-2:hover {
       background-color: #526d82;
@@ -677,7 +677,9 @@ p {
     .navbar-nav li a.main-btn {
       color: #fff;
       padding: 0 25px;
-      font-size: 14px; }
+      font-size: 14px; 
+      border-radius: 100px;
+    }
       @media only screen and (min-width: 992px) and (max-width: 1199px) {
         .navbar-nav li a.main-btn {
           padding: 0 15px; } }
