@@ -1802,7 +1802,8 @@ p {
   padding-bottom: 15px;
   padding-top: 5px; }
   .footer_copyright .copyright_content .logo {
-    margin-top: 10px; }
+    margin-top: 10px; 
+    font-size: 1.25rem;}
   .footer_copyright .copyright_content .copyright {
     font-size: 16px;
     font-weight: 500;
