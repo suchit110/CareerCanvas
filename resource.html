@@ -1,133 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Placement Resources</title>
+    <title>Resources</title>
     <style>
-        body {
-            font-family: "Arial", sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
+         @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700&display=swap");
+       body {
+          font-family: "Open Sans", sans-serif;
+          font-weight: normal;
+          font-style: normal;
+          background-color: #DDE6ED;
+      }
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
             padding: 20px;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-
-        .resource-category {
             margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
         }
-
-        .resource-category h2 {
-            color: #555;
-            margin-bottom: 10px;
-        }
-
-        .resource-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .resource-item {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-bottom: 10px;
-            padding: 15px;
-            transition: transform 0.3s ease;
-        }
-
-        .resource-item:hover {
-            transform: scale(1.05);
-        }
-
-        .resource-item a {
-            text-decoration: none;
+        .card h2 {
+            margin-top: 0;
+            font-size: 1.2em;
             color: #333;
+        }
+        .card p {
+            color: #555;
+        }
+        .card a {
+            text-decoration: none;
+            color: #007bff;
             font-weight: bold;
         }
-
-        @media (max-width: 768px) {
-            .resource-item {
-                padding: 10px;
-            }
+        .card a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
-
 <body>
-    <h1>Placement Resources</h1>
+    <h1>Resources</h1>
 
-    <div class="resource-category">
+    <div class="card">
+        <h2>Aptitude Tests</h2>
+        <p>Prepare for your interview by practicing aptitude tests.</p>
+        <ul>
+            <li><a href="https://www.khanacademy.org/">Khan Academy</a> - Offers free practice exercises and instructional videos.</li>
+            <li><a href="https://www.mba.com/exam-prep/gmat-official-starter-kit-practice-exams-1-and-2-free">GMAT Official Practice</a> - Access free GMAT practice exams.</li>
+            <li><a href="https://www.shldirect.com/en/practice-tests">SHL Practice Tests</a> - Provides a range of practice tests.</li>
+            <li><a href="https://www.psychometric-success.com/">Psychometric Success</a> - Offers a variety of practice tests and resources.</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Podcasts</h2>
+        <p>Listen to podcasts for valuable insights and tips.</p>
+        <ul>
+            <li><a href="https://www.manager-tools.com/">Career Tools</a> - Practical advice and tips for advancing in your career.</li>
+            <li><a href="https://tim.blog/podcast/">The Tim Ferriss Show</a> - Features interviews with top performers.</li>
+            <li><a href="https://hbr.org/2019/01/podcast-ideacast">HBR IdeaCast</a> - Interviews with industry experts.</li>
+            <li><a href="https://theartofcharm.com/podcast/">The Art of Charm</a> - Focuses on personal development and communication skills.</li>
+        </ul>
+    </div>
+
+    <div class="card">
         <h2>Interview Questions</h2>
-        <ul class="resource-list" id="interviewQuestionsList"></ul>
+        <p>Prepare for your interview by reviewing common interview questions.</p>
+        <ul>
+            <li><a href="https://www.themuse.com/advice/interview-questions-to-ask">The Muse - Interview Questions to Ask</a> - Comprehensive list of interview questions.</li>
+            <li><a href="https://www.glassdoor.com/Interview/index.htm">Glassdoor - Interview Questions and Reviews</a> - Access interview questions shared by candidates.</li>
+            <li><a href="https://www.themuse.com/advice/how-to-answer-the-31-most-common-interview-questions">The Muse - How to Answer the 31 Most Common Interview Questions</a> - Tips on answering common interview questions.</li>
+            <li><a href="https://www.monster.com/career-advice/article/100-potential-interview-questions">Monster - 100 Potential Interview Questions</a> - A wide range of interview questions across different industries.</li>
+        </ul>
     </div>
 
-    <div class="resource-category">
-        <h2>Study Materials</h2>
-        <ul class="resource-list" id="studyMaterialsList"></ul>
+    <div class="card">
+        <h2>Recommended Books</h2>
+        <p>Explore books that offer valuable insights for interview preparation and career development.</p>
+        <ul>
+            <li><a href="https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850">Cracking the Coding Interview</a> by Gayle Laakmann McDowell - Essential for software engineering interviews.</li>
+            <li><a href="https://www.amazon.com/Case-Point-10th-Interview-Preparation/dp/0986370732">Case in Point: Complete Case Interview Preparation</a> by Marc P. Cosentino - Ideal for consulting interviews.</li>
+            <li><a href="https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034">How to Win Friends and Influence People</a> by Dale Carnegie - Classic book on interpersonal skills and communication.</li>
+            <li><a href="https://www.amazon.com/What-Color-Your-Parachute-2021/dp/1984857861">What Color Is Your Parachute? 2021: Your Guide to a Lifetime of Meaningful Work and Career Success</a> by Richard N. Bolles - Offers guidance on career exploration and job search strategies.</li>
+        </ul>
     </div>
 
-    <div class="resource-category">
-        <h2>Online Platforms</h2>
-        <ul class="resource-list" id="onlinePlatformsList"></ul>
+    <div class="card">
+        <h2>Online Courses</h2>
+        <p>Enroll in online courses to enhance your skills and knowledge.</p>
+        <ul>
+            <li><a href="https://www.udemy.com/courses/search/?q=interview%20preparation">Udemy - Interview Preparation Courses</a> - Offers a variety of courses on interview techniques and skills.</li>
+            <li><a href="https://www.coursera.org/courses?query=interview%20preparation">Coursera - Interview Preparation Courses</a> - Explore courses from top universities and institutions.</li>
+            <li><a href="https://www.linkedin.com/learning/topics/interviewing">LinkedIn Learning - Interviewing</a> - Features courses on interview preparation, techniques, and strategies.</li>
+            <li><a href="https://www.skillshare.com/browse/interview-preparation">Skillshare - Interview Preparation</a> - Access classes covering interview tips, resume writing, and more.</li>
+        </ul>
     </div>
-
-    <script>
-        try {
-            const interviewQuestionsData = [
-                { title: 'Technical Interview Questions', link: 'https://example.com/technical-interview' },
-                { title: 'Behavioral Interview Questions', link: 'https://example.com/behavioral-interview' },
-                { title: 'Common Interview Questions', link: 'https://example.com/common-interview' },
-            ];
-
-            const studyMaterialsData = [
-                { title: 'Programming Basics', link: 'https://example.com/programming-basics' },
-                { title: 'Data Structures and Algorithms', link: 'https://example.com/data-structures-algorithms' },
-                { title: 'Resume Writing Guide', link: 'https://example.com/resume-writing' },
-            ];
-
-            const onlinePlatformsData = [
-                { title: 'LeetCode', link: 'https://leetcode.com/' },
-                { title: 'HackerRank', link: 'https://www.hackerrank.com/' },
-                { title: 'Coursera', link: 'https://www.coursera.org/' },
-            ];
-
-            function createResourceList(containerId, data) {
-                const container = document.getElementById(containerId);
-                if (!container) throw new Error(`Container with id '${containerId}' not found.`);
-
-                const list = document.createElement('ul');
-                list.classList.add('resource-list');
-
-                data.forEach(resource => {
-                    const listItem = document.createElement('li');
-                    listItem.classList.add('resource-item');
-
-                    const link = document.createElement('a');
-                    link.href = resource.link;
-                    link.textContent = resource.title;
-
-                    listItem.appendChild(link);
-                    list.appendChild(listItem);
-                });
-
-                container.appendChild(list);
-            }
-
-            createResourceList('interviewQuestionsList', interviewQuestionsData);
-            createResourceList('studyMaterialsList', studyMaterialsData);
-            createResourceList('onlinePlatformsList', onlinePlatformsData);
-        } catch (error) {
-            console.error('An error occurred:', error.message);
-        }
-    </script>
 </body>
-
 </html>
