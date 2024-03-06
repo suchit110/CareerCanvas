@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Calendar with Cards</title>
     <style>
+      @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700&display=swap");
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Open Sans", sans-serif;
+            font-weight: normal;
+            font-style: normal;
+            color: #444;
+            background-color: white;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
         }
         .calendar {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
+            gap: 10px;
+            border: 1px solid black;
+            padding: 10px;
         }
         .date {
             border: 1px solid #ccc;
@@ -19,29 +33,59 @@
             height: 100px;
             position: relative;
             cursor: pointer;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .date:hover {
+            background-color: #f9f9f9;
+        }
+        .date.has-info {
+            background-color: #3dbeee; /* Light blue background color for dates with info */
+        }
+        .date:hover .card {
+            display: block;
+        }
+        .day-name {
+            font-weight: bold;
+            color: #555;
         }
         .card {
             position: absolute;
-            background-color: #f9c1bb; /* Light red background color for cards with info */
+            background-color: #f9c1bb; /* Light blue background color for cards with info */
             border: 1px solid #ccc;
             padding: 10px;
             width: 200px;
             z-index: 1;
             display: none; /* Initially hide the card */
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        .date.has-info {
-            background-color: #f9c1bb; /* Light red background color for dates with info */
+        .card h3 {
+            margin-top: 0;
+            color: #333;
         }
-        .date:hover .card {
-            display: block;
+        .card p {
+            margin: 5px 0;
+            color: #666;
         }
-        .apply-link {
-            margin-top: 10px;
-            text-align: center;
+        .apply-link a {
+            color: #fff;
+            background-color: #333;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 3px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .apply-link a:hover {
+            background-color: #555;
         }
     </style>
 </head>
 <body>
+    <h1>Job Calendar</h1>
     <div class="calendar" id="calendar"></div>
 
     <script>
@@ -88,9 +132,9 @@
 
             // Add link to the job details page
             if (job) {
-                dateElement.innerHTML = `<span>${daysOfWeek[dayOfWeek]}</span> <a href="jobs.html#${job.company}-${job.role}">${i}</a>`;
+                dateElement.innerHTML = `<span class="day-name">${daysOfWeek[dayOfWeek]}</span> <a href="jobs.html#${job.company}-${job.role}">${i}</a>`;
             } else {
-                dateElement.innerHTML = `<span>${daysOfWeek[dayOfWeek]}</span> ${i}`;
+                dateElement.innerHTML = `<span class="day-name">${daysOfWeek[dayOfWeek]}</span> ${i}`;
             }
 
             // If job data exists, create a card with job information and apply background color
