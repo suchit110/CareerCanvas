@@ -7,183 +7,261 @@
 </head>
 <body>
     <style>
-        /* Google Fonts - Poppins */
-        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'poppins', sans-serif;
-        }
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: #dde6ed;
-        }
-        .box {
-            position: relative;
-            width: 380px;
-            height: 420px;
-            background: #9db2bf;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .form {
-            position: absolute;
-            inset: 2px;
-            border-radius: 8px;
-            background: #28292d;
-            z-index: 10;
-            padding: 50px 40px;
-            display: flex;
-            flex-direction: column;
-        }
-        .form h2 {
-            color: #9db2bf;
-            font-weight: 500;
-            text-align: center;
-            letter-spacing: 0.1em;
-        }
-        .inputbox {
-            position: relative;
-            width: 300px;
-            margin-top: 35px;
-        }
-        .inputbox input {
-            position: relative;
-            width: 100%;
-            padding: 20px 10px 10px;
-            background: transparent;
-            border: none;
-            outline: none;
-            color: #23242a;
-            font-size: 1em;
-            letter-spacing: 0.05em;
-            z-index: 10;
-        }
-        .inputbox span {
-            position: absolute;
-            left: 0;
-            padding: 20px 0px 10px;
-            font-size: 1em;
-            color: #8f8f8f;
-            pointer-events: none;
-            letter-spacing: 0.05em;
-            transition: 0.5s;
-        }
-        .inputbox input:valid ~ span,
-        .inputbox input:focus ~ span {
-            color: #9db2bf;
-            transform: translateX(0px) translateY(-34px);
-            font-size: 0.75em;
-        }
-        .inputbox i {
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            background: #9db2bf;
-            border-radius: 4px;
-            transition: 0.5s;
-            pointer-events: none;
-        }
-        .inputbox input:valid ~ i,
-        .inputbox input:focus ~ i {
-            height: 44px;
-        }
-        .links {
-            display: flex;
-            justify-content: space-between;
-        }
-        .links a {
-            margin: 10px 0;
-            font-size: 0.75em;
-            color: #8f8f8f;
-            text-decoration: none;
-        }
-        .links a:hover,
-        .links a:nth-child(2) {
-            color: #9db2bf;
-        }
-        input[type="submit"] {
-            border: none;
-            outline: none;
-            background: #9db2bf;
-            padding: 11px 25px;
-            width: 100px;
-            margin-top: 10px;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        input[type="submit"]:active {
-            opacity: 0.8;
-        }
-        .register-btn {
-            text-align: center;
-            margin-top: 20px;
-            color: #9db2bf;
-            cursor: pointer;
-        }
+        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+html,body{
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  background: #dde6ed;
+}
+::selection{
+  background: #dde6ed;
+  color: #fff;
+}
+.wrapper{
+  overflow: hidden;
+  max-width: 390px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0px 15px 20px #526d82;
+}
+.wrapper .title-text{
+  display: flex;
+  width: 200%;
+}
+.wrapper .title{
+  width: 50%;
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.wrapper .slide-controls{
+  position: relative;
+  display: flex;
+  height: 50px;
+  width: 100%;
+  overflow: hidden;
+  margin: 30px 0 10px 0;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+.slide-controls .slide{
+  height: 100%;
+  width: 100%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 48px;
+  cursor: pointer;
+  z-index: 1;
+  transition: all 0.6s ease;
+}
+.slide-controls label.signup{
+  color: #526d82;
+}
+.slide-controls .slider-tab{
+  position: absolute;
+  height: 100%;
+  width: 50%;
+  left: 0;
+  z-index: 0;
+  border-radius: 5px;
+  background: #526d82;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+input[type="radio"]{
+  display: none;
+}
+#signup:checked ~ .slider-tab{
+  left: 50%;
+}
+#signup:checked ~ label.signup{
+  color: #fff;
+  cursor: default;
+  user-select: none;
+}
+#signup:checked ~ label.login{
+  color: #526d82;
+}
+#login:checked ~ label.signup{
+  color: #526d82;
+}
+#login:checked ~ label.login{
+  cursor: default;
+  user-select: none;
+}
+.wrapper .form-container{
+  width: 100%;
+  overflow: hidden;
+}
+.form-container .form-inner{
+  display: flex;
+  width: 200%;
+}
+.form-container .form-inner form{
+  width: 50%;
+  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
+}
+.form-inner form .field{
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+}
+.form-inner form .field input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  padding-left: 15px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  border-bottom-width: 2px;
+  font-size: 17px;
+  transition: all 0.3s ease;
+}
+.form-inner form .field input:focus{
+  border-color: #9db2bf;
+  /* box-shadow: inset 0 0 3px #fb6aae; */
+}
+.form-inner form .field input::placeholder{
+  color: #999;
+  transition: all 0.3s ease;
+}
+form .field input:focus::placeholder{
+  color: #b3b3b3;
+}
+.form-inner form .pass-link{
+  margin-top: 5px;
+}
+.form-inner form .signup-link{
+  text-align: center;
+  margin-top: 30px;
+}
+.form-inner form .pass-link a,
+.form-inner form .signup-link a{
+  color: #526d82;
+  text-decoration: none;
+}
+.form-inner form .pass-link a:hover,
+.form-inner form .signup-link a:hover{
+  text-decoration: underline;
+}
+form .btn{
+  height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+form .btn .btn-layer{
+  height: 100%;
+  width: 300%;
+  position: absolute;
+  left: -100%;
+  background: #526d82;
+  border-radius: 5px;
+  transition: all 0.4s ease;;
+}
+form .btn:hover .btn-layer{
+  left: 0;
+}
+form .btn input[type="submit"]{
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  padding-left: 0;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+}
     </style>
-    <div class="box">
-        <div class="form" id="loginForm">
-
-            <h2>Sign in </h2>
-            <div class="inputbox">
-                <input type="text" required="required">
-                <span>Username </span>
-                <i></i>
-            </div>
-
-            <div class="inputbox">
-                <input type="password" required="required">
-                <span>Password</span>
-                <i></i>
-            </div>
-
-            <div class="links">
-                <a href="#"> Forgot Password</a>
-                <a href="#" onclick="toggleForm()">Signup</a>
-            </div>
-            <input type="submit" value="Login">
+    <div class="wrapper">
+        <div class="title-text">
+          <div class="title login">
+            Login Form
+          </div>
+          <div class="title signup">
+            Signup Form
+          </div>
         </div>
-
-        <div class="form" id="registerForm" style="display: none;">
-
-            <h2>Register</h2>
-            <div class="inputbox">
-                <input type="text" required="required">
-                <span>Username </span>
-                <i></i>
-            </div>
-
-            <div class="inputbox">
-                <input type="password" required="required">
-                <span>Password</span>
-                <i></i>
-            </div>
-
-            <div class="links">
-                <a href="#" onclick="toggleForm()">Already have an account? Login</a>
-            </div>
-            <input type="submit" value="Register">
+        <div class="form-container">
+          <div class="slide-controls">
+            <input type="radio" name="slide" id="login" checked>
+            <input type="radio" name="slide" id="signup">
+            <label for="login" class="slide login">Login</label>
+            <label for="signup" class="slide signup">Signup</label>
+            <div class="slider-tab"></div>
+          </div>
+          <div class="form-inner">
+            <form action="#" class="login">
+              <div class="field">
+                <input type="text" placeholder="Email Address" required>
+              </div>
+              <div class="field">
+                <input type="password" placeholder="Password" required>
+              </div>
+              <div class="pass-link">
+                <a href="#">Forgot password?</a>
+              </div>
+              <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" value="Login">
+              </div>
+              <div class="signup-link">
+                Not a member? <a href="">Signup now</a>
+              </div>
+            </form>
+            <form action="#" class="signup">
+              <div class="field">
+                <input type="text" placeholder="Email Address" required>
+              </div>
+              <div class="field">
+                <input type="password" placeholder="Password" required>
+              </div>
+              <div class="field">
+                <input type="password" placeholder="Confirm password" required>
+              </div>
+              <div class="field btn">
+                <div class="btn-layer"></div>
+                <input type="submit" value="Signup">
+              </div>
+            </form>
+          </div>
         </div>
-    </div>
-
-    <div class="register-btn" onclick="toggleForm()">Register</div>
-
-    <script>
-        function toggleForm() {
-            const loginForm = document.getElementById('loginForm');
-            const registerForm = document.getElementById('registerForm');
-
-            loginForm.style.display = loginForm.style.display === 'none' ? 'flex' : 'none';
-            registerForm.style.display = registerForm.style.display === 'none' ? 'flex' : 'none';
-        }
-    </script>
+      </div>
+      <script>
+        const loginText = document.querySelector(".title-text .login");
+const loginForm = document.querySelector("form.login");
+const loginBtn = document.querySelector("label.login");
+const signupBtn = document.querySelector("label.signup");
+const signupLink = document.querySelector("form .signup-link a");
+signupBtn.onclick = (()=>{
+  loginForm.style.marginLeft = "-50%";
+  loginText.style.marginLeft = "-50%";
+});
+loginBtn.onclick = (()=>{
+  loginForm.style.marginLeft = "0%";
+  loginText.style.marginLeft = "0%";
+});
+signupLink.onclick = (()=>{
+  signupBtn.click();
+  return false;
+});
+      </script>
 </body>
 </html>
