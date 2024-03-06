@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Calendar with Cards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+        .date {
+            border: 1px solid #ccc;
+            padding: 10px;
+            height: 100px;
+            position: relative;
+            cursor: pointer;
+        }
+        .card {
+            position: absolute;
+            background-color: #f9c1bb; /* Light red background color for cards with info */
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+            z-index: 1;
+            display: none; /* Initially hide the card */
+        }
+        .date.has-info {
+            background-color: #f9c1bb; /* Light red background color for dates with info */
+        }
+        .date:hover .card {
+            display: block;
+        }
+        .apply-link {
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendar" id="calendar"></div>
+
+    <script>
+        // Get today's date
+        const today = new Date();
+
+        // Get the number of days in the current month
+        const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+
+        // Days of the week
+        const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        // Sample job data
+        const jobData = [
+            { date: 5, company: "ABC Corp", role: "Software Engineer" },
+            { date: 10, company: "XYZ Ltd", role: "Data Analyst" },
+            { date: 15, company: "Tech Innovators", role: "Product Manager" },
+            { date: 20, company: "Global Solutions", role: "Marketing Specialist" },
+            // Add more sample job data as needed
+        ];
+
+        // Create a reference to the calendar container
+        const calendar = document.getElementById('calendar');
+
+        // Loop through each day of the month
+        for (let i = 1; i <= daysInMonth; i++) {
+            // Create a new date object for the current day
+            const date = new Date(today.getFullYear(), today.getMonth(), i);
+
+            // Get the day of the week (0 - Sunday, 1 - Monday, etc.)
+            const dayOfWeek = date.getDay();
+
+            // Create a new date element
+            const dateElement = document.createElement('div');
+            dateElement.classList.add('date');
+
+            // Check if there is job data for this date
+            const job = jobData.find(job => job.date === i);
+
+            // If job data exists, add a class to indicate that there is info available
+            if (job) {
+                dateElement.classList.add('has-info');
+            }
+
+            // Add link to the job details page
+            if (job) {
+                dateElement.innerHTML = `<span>${daysOfWeek[dayOfWeek]}</span> <a href="jobs.html#${job.company}-${job.role}">${i}</a>`;
+            } else {
+                dateElement.innerHTML = `<span>${daysOfWeek[dayOfWeek]}</span> ${i}`;
+            }
+
+            // If job data exists, create a card with job information and apply background color
+            if (job) {
+                const card = document.createElement('div');
+                card.classList.add('card');
+                card.innerHTML = `
+                    <h3>${date.toDateString()}</h3>
+                    <p><strong>Company:</strong> ${job.company}</p>
+                    <p><strong>Role:</strong> ${job.role}</p>
+                    <div class="apply-link">
+                        <a href="jobs.html#${job.company}-${job.role}">Apply Now</a>
+                    </div>
+                `;
+                dateElement.appendChild(card);
+            }
+
+            // Append the date element to the calendar
+            calendar.appendChild(dateElement);
+        }
+    </script>
+</body>
+</html>
