@@ -16,6 +16,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  color: #526d82;
 }
 html,body{
   display: grid;
@@ -199,10 +200,10 @@ form .btn input[type="submit"]{
     <div class="wrapper">
         <div class="title-text">
           <div class="title login">
-            Login Form
+           CareerCanvas
           </div>
           <div class="title signup">
-            Signup Form
+            CareerCanvas
           </div>
         </div>
         <div class="form-container">
@@ -214,12 +215,12 @@ form .btn input[type="submit"]{
             <div class="slider-tab"></div>
           </div>
           <div class="form-inner">
-            <form action="#" class="login">
+            <form action="index.html" class="login">
               <div class="field">
-                <input type="text" value="email" placeholder="Email Address" required>
+                <input type="text" value="" placeholder="Email Address" required>
               </div>
               <div class="field">
-                <input type="password" value="password" placeholder="Password" required>
+                <input type="password" value="" placeholder="Password" required>
               </div>
               <div class="pass-link">
                 <a href="#">Forgot password?</a>
@@ -233,12 +234,12 @@ form .btn input[type="submit"]{
                 Not a member? <a href="">Signup now</a>
               </div>
             </form>
-            <form action="#" class="signup">
+            <form action="login.html" class="signup">
               <div class="field">
-                <input type="text" value="email" placeholder="Email Address" required>
+                <input type="text" value="" placeholder="Email Address" required>
               </div>
               <div class="field">
-                <input type="password" value="password" placeholder="Password" required>
+                <input type="password" value="" placeholder="Password" required>
               </div>
               <div class="field">
                 <input type="password" placeholder="Confirm password" required>
@@ -252,6 +253,9 @@ form .btn input[type="submit"]{
         </div>
       </div>
       <script>
+
+
+
         const loginText = document.querySelector(".title-text .login");
 const loginForm = document.querySelector("form.login");
 const loginBtn = document.querySelector("label.login");
@@ -269,9 +273,81 @@ signupLink.onclick = (()=>{
   signupBtn.click();
   return false;
 });
+
+
+// Function to validate email address
+function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Function to validate password
+        function validatePassword(password) {
+            // Password should be at least 8 characters long
+            return password.length >= 8;
+        }
+
+        // Function to handle login
+        function login() {
+            const emailInput = document.querySelector("form.login input[type='text']");
+            const passwordInput = document.querySelector("form.login input[type='password']");
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+
+            // Perform email and password validation
+            if (!validateEmail(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                alert("Password should be at least 8 characters long.");
+                return;
+            }
+
+            // Your login logic goes here
+            // You can call your authentication function or submit the form
+
+            // For demonstration purposes, let's just log the email and password
+            console.log("Email:", email);
+            console.log("Password:", password);
+        }
+
+        // Function to handle registration
+        function register() {
+            const emailInput = document.querySelector("form.signup input[type='text']");
+            const passwordInput = document.querySelector("form.signup input[type='password']");
+            const confirmPasswordInput = document.querySelector("form.signup input[placeholder='Confirm password']");
+
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Perform email and password validation
+            if (!validateEmail(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!validatePassword(password)) {
+                alert("Password should be at least 8 characters long.");
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return;
+            }
+
+            // Your registration logic goes here
+            // You can call your registration function or submit the form
+
+            // For demonstration purposes, let's just log the email and password
+            console.log("Email:", email);
+            console.log("Password:", password);
+        }
       </script>
-      <script src="index.js">
-        
-      </script>
+      
 </body>
 </html>
