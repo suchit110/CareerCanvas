@@ -1,353 +1,388 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js"></script>
+    <meta charset="utf-8">
+
+    <!--====== Title ======-->
+    <title>CareerCanvas | Login</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+
+    <!--====== Flaticon CSS ======-->
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+
+    <!--====== Font Awesome CSS ======-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <!--====== Default CSS ======-->
+    <link rel="stylesheet" href="assets/css/default.css">
+
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-  color: #526d82;
-}
-html,body{
-  display: grid;
-  height: 100%;
-  width: 100%;
-  place-items: center;
-  background: #dde6ed;
-}
-::selection{
-  background: #dde6ed;
-  color: #fff;
-}
-.wrapper{
-  overflow: hidden;
-  max-width: 390px;
-  background: #fff;
-  padding: 30px;
-  border-radius: 5px;
-  box-shadow: 0px 15px 20px #526d82;
-}
-.wrapper .title-text{
-  display: flex;
-  width: 200%;
-}
-.wrapper .title{
-  width: 50%;
-  font-size: 35px;
-  font-weight: 600;
-  text-align: center;
-  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
-}
-.wrapper .slide-controls{
-  position: relative;
-  display: flex;
-  height: 50px;
-  width: 100%;
-  overflow: hidden;
-  margin: 30px 0 10px 0;
-  justify-content: space-between;
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-}
-.slide-controls .slide{
-  height: 100%;
-  width: 100%;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
-  line-height: 48px;
-  cursor: pointer;
-  z-index: 1;
-  transition: all 0.6s ease;
-}
-.slide-controls label.signup{
-  color: #526d82;
-}
-.slide-controls .slider-tab{
-  position: absolute;
-  height: 100%;
-  width: 50%;
-  left: 0;
-  z-index: 0;
-  border-radius: 5px;
-  background: #526d82;
-  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
-}
-input[type="radio"]{
-  display: none;
-}
-#signup:checked ~ .slider-tab{
-  left: 50%;
-}
-#signup:checked ~ label.signup{
-  color: #fff;
-  cursor: default;
-  user-select: none;
-}
-#signup:checked ~ label.login{
-  color: #526d82;
-}
-#login:checked ~ label.signup{
-  color: #526d82;
-}
-#login:checked ~ label.login{
-  cursor: default;
-  user-select: none;
-}
-.wrapper .form-container{
-  width: 100%;
-  overflow: hidden;
-}
-.form-container .form-inner{
-  display: flex;
-  width: 200%;
-}
-.form-container .form-inner form{
-  width: 50%;
-  transition: all 0.6s cubic-bezier(0.68,-0.55,0.265,1.55);
-}
-.form-inner form .field{
-  height: 50px;
-  width: 100%;
-  margin-top: 20px;
-}
-.form-inner form .field input{
-  height: 100%;
-  width: 100%;
-  outline: none;
-  padding-left: 15px;
-  border-radius: 5px;
-  border: 1px solid lightgrey;
-  border-bottom-width: 2px;
-  font-size: 17px;
-  transition: all 0.3s ease;
-}
-.form-inner form .field input:focus{
-  border-color: #9db2bf;
-  /* box-shadow: inset 0 0 3px #fb6aae; */
-}
-.form-inner form .field input::placeholder{
-  color: #999;
-  transition: all 0.3s ease;
-}
-form .field input:focus::placeholder{
-  color: #b3b3b3;
-}
-.form-inner form .pass-link{
-  margin-top: 5px;
-}
-.form-inner form .signup-link{
-  text-align: center;
-  margin-top: 30px;
-  color: #526d82;
-}
-.form-inner form .pass-link a,
-.form-inner form .signup-link a{
-  color: #526d82;
-  text-decoration: none;
-}
-.form-inner form .pass-link a:hover,
-.form-inner form .signup-link a:hover{
-  text-decoration: underline;
-}
-form .btn{
-  height: 50px;
-  width: 100%;
-  border-radius: 5px;
-  position: relative;
-  overflow: hidden;
-  
-}
-form .btn .btn-layer{
-  height: 100%;
-  width: 300%;
-  position: absolute;
-  left: -100%;
-  background: #526d82;
-  border-radius: 5px;
-  transition: all 0.4s ease;
-  color: #fff;
-}
-form .btn:hover .btn-layer{
-  left: 0;
-}
-form .btn input[type="submit"]{
-  height: 100%;
-  width: 100%;
-  z-index: 1;
-  position: relative;
-  background: none;
-  border: none;
-  color: #fff;
-  padding-left: 0;
-  border-radius: 5px;
-  font-size: 20px;
-  font-weight: 500;
-  cursor: pointer;
-}
+        .auth-container {
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        .auth-tab {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            border-bottom: 2px solid #eee;
+        }
+        .auth-tab.active {
+            border-bottom: 2px solid #0067da;
+            color: #0067da;
+        }
+        .auth-form {
+            padding: 20px 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn-auth {
+            width: 100%;
+            padding: 12px;
+            background-color: #0067da;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-auth:hover {
+            background-color: #0056b3;
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
     </style>
-    <div class="wrapper">
-        <div class="title-text">
-          <div class="title login">
-           CareerCanvas
-          </div>
-          <div class="title signup">
-            CareerCanvas
-          </div>
+</head>
+
+<body>
+    <!--[if IE]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+    
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="form-container">
-          <div class="slide-controls">
-            <input type="radio" name="slide" id="login" checked>
-            <input type="radio" name="slide" id="signup">
-            <label for="login" class="slide login">Login</label>
-            <label for="signup" class="slide signup">Signup</label>
-            <div class="slider-tab"></div>
-          </div>
-          <div class="form-inner">
-            <form action="index.html" class="login">
-              <div class="field">
-                <input type="text" value="" placeholder="Email Address" required>
-              </div>
-              <div class="field">
-                <input type="password" value="" placeholder="Password" required>
-              </div>
-              <div class="pass-link">
-                <a href="#">Forgot password?</a>
-              </div>
-              <div class="field btn">
-                <div class="btn-layer"></div>
-                <!-- <button type="submit" value="Login">Login</button> -->
-                 <input onclick="login()" type="submit" value="Login"> 
-              </div>
-              <div class="signup-link">
-                Not a member? <a href="">Signup now</a>
-              </div>
-            </form>
-            <form action="login.html" class="signup">
-              <div class="field">
-                <input type="text" value="" placeholder="Email Address" required>
-              </div>
-              <div class="field">
-                <input type="password" value="" placeholder="Password" required>
-              </div>
-              <div class="field">
-                <input type="password" placeholder="Confirm password" required>
-              </div>
-              <div class="field btn">
-                <div class="btn-layer"></div>
-                <input onclick="register()" type="submit" value="Signup">
-              </div>
-            </form>
-          </div>
+    </div>
+
+    <!--====== PRELOADER PART ENDS ======-->
+
+    <!--====== HEADER PART START ======-->
+
+    <header class="header-area header_shadow">
+        <div class="header-navbar">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="index.html">CareerCanvas</a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="toggler-icon"></span>
+                        <span class="toggler-icon"></span>
+                        <span class="toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="calander.html">Calendar</a></li>
+                            <li><a href="jobs.html">Jobs</a></li>
+                            <li><a href="resource.html">Resource</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li class="active"><a href="login.html">Login</a></li>
+                        </ul> <!-- navbar nav -->
+                    </div>
+                </nav>
+            </div> <!-- container -->
+        </div> <!-- header navbar -->
+    </header>
+
+    <!--====== HEADER PART ENDS ======-->
+
+    <!--====== LOGIN PART START ======-->
+
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <div class="auth-tab active" id="loginTab" onclick="switchTab('login')">Login</div>
+                    <div class="auth-tab" id="registerTab" onclick="switchTab('register')">Register</div>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <input type="email" id="loginEmail" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                    </div>
+                    <button type="button" class="btn-auth" onclick="login()">Login</button>
+                    <div class="auth-footer">
+                        <p>Forgot password? <a href="#">Reset it here</a></p>
+                    </div>
+                </div>
+                
+                <!-- Register Form -->
+                <div id="registerForm" class="auth-form" style="display:none;">
+                    <div class="form-group">
+                        <input type="text" id="registerName" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="registerEmail" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="registerPassword" class="form-control" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="button" class="btn-auth" onclick="register()">Register</button>
+                    <div class="auth-footer">
+                        <p>By registering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <script>
+    </section>
 
+    <!--====== LOGIN PART ENDS ======-->
 
+    <!--====== FOOTER PART START ======-->
 
-        const loginText = document.querySelector(".title-text .login");
-const loginForm = document.querySelector("form.login");
-const loginBtn = document.querySelector("label.login");
-const signupBtn = document.querySelector("label.signup");
-const signupLink = document.querySelector("form .signup-link a");
-signupBtn.onclick = (()=>{
-  loginForm.style.marginLeft = "-50%";
-  loginText.style.marginLeft = "-50%";
-});
-loginBtn.onclick = (()=>{
-  loginForm.style.marginLeft = "0%";
-  loginText.style.marginLeft = "0%";
-});
-signupLink.onclick = (()=>{
-  signupBtn.click();
-  return false;
-});
+    <footer class="footer_area gray-bg">
+        <div class="footer_copyright">
+            <div class="container">
+                <div class="copyright_content text-center d-sm-flex justify-content-between align-items-center">
+                    <a href="#" class="logo">CareerCanvas</a>
+                    <p class="copyright">CareerCanvas © 2024 All Right Reserved</p>
+                </div> <!-- copyright content -->
+            </div> <!-- container -->
+        </div> <!-- footer copyright -->
+    </footer>
 
+    <!--====== FOOTER PART ENDS ======-->
 
-// Function to validate email address
-function validateEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== Jquery js ======-->
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!--====== Main js ======-->
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        // Make switchTab function available globally
+        function switchTab(tab) {
+            if (tab === 'login') {
+                document.getElementById('loginTab').classList.add('active');
+                document.getElementById('registerTab').classList.remove('active');
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('registerForm').style.display = 'none';
+            } else {
+                document.getElementById('registerTab').classList.add('active');
+                document.getElementById('loginTab').classList.remove('active');
+                document.getElementById('registerForm').style.display = 'block';
+                document.getElementById('loginForm').style.display = 'none';
+            }
         }
 
-        // Function to validate password
-        function validatePassword(password) {
-            // Password should be at least 8 characters long
-            return password.length >= 8;
-        }
-
-        // Function to handle login
+        // Simple direct login and registration functions
         function login() {
-            const emailInput = document.querySelector("form.login input[type='text']");
-            const passwordInput = document.querySelector("form.login input[type='password']");
+            try {
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value;
 
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
+                if (!email || !password) {
+                    alert('Please enter both email and password');
+                    return;
+                }
 
-            // Perform email and password validation
-            if (!validateEmail(email)) {
-                alert("Please enter a valid email address.");
-                return;
+                // Get users from localStorage
+                let users = [];
+                try {
+                    const usersStr = localStorage.getItem('users');
+                    users = usersStr ? JSON.parse(usersStr) : [];
+                    
+                    // Make sure users is an array
+                    if (!Array.isArray(users)) {
+                        console.error('Users is not an array, resetting');
+                        users = [];
+                    }
+                } catch (e) {
+                    console.error('Error parsing users from localStorage', e);
+                    users = [];
+                }
+                
+                // Find user with matching email and password
+                const user = users.find(u => u && u.email === email && u.password === password);
+
+                if (user) {
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    alert('Login successful!');
+                    window.location.href = 'profile.html';
+                } else {
+                    alert('Invalid email or password');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('An error occurred during login. Please try again.');
             }
-
-            if (!validatePassword(password)) {
-                alert("Password should be at least 8 characters long.");
-                return;
-            }
-
-            // Your login logic goes here
-            // You can call your authentication function or submit the form
-
-            // For demonstration purposes, let's just log the email and password
-            console.log("Email:", email);
-            console.log("Password:", password);
         }
 
-        // Function to handle registration
         function register() {
-            const emailInput = document.querySelector("form.signup input[type='text']");
-            const passwordInput = document.querySelector("form.signup input[type='password']");
-            const confirmPasswordInput = document.querySelector("form.signup input[placeholder='Confirm password']");
+            try {
+                const name = document.getElementById('registerName').value.trim();
+                const email = document.getElementById('registerEmail').value.trim();
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
 
-            const email = emailInput.value.trim();
-            const password = passwordInput.value;
-            const confirmPassword = confirmPasswordInput.value;
+                if (!name || !email || !password || !confirmPassword) {
+                    alert('Please fill in all fields');
+                    return;
+                }
 
-            // Perform email and password validation
-            if (!validateEmail(email)) {
-                alert("Please enter a valid email address.");
-                return;
+                if (!validateEmail(email)) {
+                    alert('Please enter a valid email address');
+                    return;
+                }
+
+                if (password.length < 8) {
+                    alert('Password must be at least 8 characters long');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match');
+                    return;
+                }
+
+                // Get existing users
+                let users = [];
+                try {
+                    const usersStr = localStorage.getItem('users');
+                    users = usersStr ? JSON.parse(usersStr) : [];
+                    
+                    // Make sure users is an array
+                    if (!Array.isArray(users)) {
+                        console.error('Users is not an array, resetting');
+                        users = [];
+                    }
+                } catch (e) {
+                    console.error('Error parsing users from localStorage', e);
+                    users = [];
+                }
+                
+                // Check if user already exists
+                const userExists = users.some(u => u && u.email === email);
+                if (userExists) {
+                    alert('An account with this email already exists');
+                    return;
+                }
+
+                // Create new user
+                const newUser = {
+                    name: name,
+                    email: email,
+                    password: password,
+                    createdAt: new Date().toISOString()
+                };
+
+                // Add to users array
+                users.push(newUser);
+                
+                // Save to localStorage
+                localStorage.setItem('users', JSON.stringify(users));
+                console.log('User registered:', newUser);
+                
+                alert('Registration successful! Please login.');
+                
+                // Switch to login tab and pre-fill email
+                switchTab('login');
+                document.getElementById('loginEmail').value = email;
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('An error occurred during registration. Please try again.');
             }
-
-            if (!validatePassword(password)) {
-                alert("Password should be at least 8 characters long.");
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                alert("Passwords do not match.");
-                return;
-            }
-
-            // Your registration logic goes here
-            // You can call your registration function or submit the form
-
-            // For demonstration purposes, let's just log the email and password
-            console.log("Email:", email);
-            console.log("Password:", password);
         }
-      </script>
-      
+
+        function validateEmail(email) {
+            const expression = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return expression.test(email);
+        }
+
+        // Check if user is already logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser && currentUser.email) {
+                    window.location.href = 'profile.html';
+                }
+                
+                // For testing/debugging
+                console.log('Current localStorage users:', localStorage.getItem('users'));
+            } catch (error) {
+                console.error('Error checking authentication on page load:', error);
+            }
+        });
+    </script>
 </body>
-</html>
+
+</html> 

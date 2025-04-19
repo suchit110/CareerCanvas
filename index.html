@@ -122,7 +122,7 @@
                                 
                             </li>
                             <li>
-                                <a href="#">Company</a>
+                                <a href="jobs.html">Jobs</a>
                                 
                                 <!-- <ul class="sub-menu">
                                    
@@ -143,7 +143,17 @@
                             <!-- <li><a href="login.html">Log In</a></li> -->
                            <li> <a href="faq.html">FAQ</a> </li>
 
-                            <li><a class="main-btn" href="login.html"><img src="assets/images/user.png" alt=""></a></li>
+                            <li class="profile-section" id="profileSection">
+                                <div class="user-info" id="userInfo" style="display: none;">
+                                    <span id="userEmail" style="color: #526d82; margin-right: 10px;"></span>
+                                    <a href="profile.html" class="profile-link" style="color: #526d82; text-decoration: none; margin-right: 10px;">Profile</a>
+                                    <button onclick="logout()" class="logout-btn" style="background: none; border: none; color: #526d82; cursor: pointer;">Logout</button>
+                                </div>
+                                <div class="login-signup" id="loginSignup">
+                                    <a href="login.html" class="login-btn" style="color: #526d82; text-decoration: none; margin-right: 10px;">Login</a>
+                                    <a href="login.html" class="signup-btn" style="color: #526d82; text-decoration: none;">Sign Up</a>
+                                </div>
+                            </li>
                         </ul> <!-- navbar nav -->
                     </div> 
                     
@@ -830,6 +840,34 @@
 
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
+
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const userInfo = document.getElementById('userInfo');
+            const loginSignup = document.getElementById('loginSignup');
+            const userEmail = document.getElementById('userEmail');
+
+            if (currentUser) {
+                userInfo.style.display = 'flex';
+                loginSignup.style.display = 'none';
+                userEmail.textContent = currentUser.email;
+            } else {
+                userInfo.style.display = 'none';
+                loginSignup.style.display = 'flex';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        // Check auth status when page loads
+        window.onload = checkAuth;
+    </script>
 
 </body>
 

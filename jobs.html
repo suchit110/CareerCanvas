@@ -1,26 +1,1190 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job Details</title>
+    <meta charset="utf-8">
+
+    <!--====== Title ======-->
+    <title>CareerCanvas | Jobs</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+
+    <!--====== Flaticon CSS ======-->
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+
+    <!--====== Font Awesome CSS ======-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <!--====== Nice Select CSS ======-->
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <!--====== Default CSS ======-->
+    <link rel="stylesheet" href="assets/css/default.css">
+
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .job-list-section {
+            padding: 80px 0;
+        }
+        .job-filter {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .filter-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .filter-group {
+            margin-bottom: 25px;
+        }
+        .filter-label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .filter-select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .job-search {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        .job-search input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px 0 0 5px;
+            font-size: 16px;
+        }
+        .job-search button {
+            padding: 12px 25px;
+            background-color: #0067da;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .job-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .job-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .job-card-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        .job-card-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .job-card-title {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+        .job-card-company {
+            font-size: 16px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .job-card-details {
+            margin: 15px 0;
+        }
+        .job-card-detail {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 20px;
+            color: #666;
+        }
+        .job-card-detail i {
+            margin-right: 8px;
+            color: #0067da;
+        }
+        .job-card-tags {
+            margin: 15px 0;
+        }
+        .job-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            background-color: #f0f5ff;
+            color: #0067da;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+        .job-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .job-card-salary {
+            font-size: 18px;
+            font-weight: 600;
+            color: #0067da;
+        }
+        .pagination {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+        }
+        .pagination .page-item {
+            margin: 0 5px;
+        }
+        .pagination .page-link {
+            padding: 8px 16px;
+            border-radius: 5px;
+            color: #0067da;
+            border: 1px solid #ddd;
+        }
+        .pagination .page-link:hover,
+        .pagination .page-item.active .page-link {
+            background-color: #0067da;
+            color: white;
+            border-color: #0067da;
+        }
+        /* Application Form Modal Styles */
+        .application-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .application-form-container {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 700px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .application-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .application-form-header h2 {
+            color: #0067da;
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .application-form-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .application-form-job-info {
+            background-color: #f5f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0067da;
+        }
+        
+        .application-form-job-info h3 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 5px;
+        }
+        
+        .application-form-job-info p {
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .application-form-job-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .job-detail-badge {
+            background-color: #e9f2fe;
+            color: #0067da;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .job-detail-badge i {
+            margin-right: 5px;
+        }
+        
+        .application-form-section {
+            margin-bottom: 20px;
+        }
+        
+        .application-form-section h4 {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 15px;
+            transition: border 0.3s ease;
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus, 
+        .form-group select:focus {
+            border-color: #0067da;
+            outline: none;
+        }
+        
+        .interview-schedule-section {
+            background-color: #f0f9f0;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2e7d32;
+        }
+        
+        .submit-application-btn {
+            background-color: #0067da;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        .submit-application-btn:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        
+        /* Success message styles */
+        .application-success {
+            display: none;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .application-success i {
+            font-size: 60px;
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+        
+        .application-success h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .application-success p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .view-calendar-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>All Available Jobs</h1>
-    <ul>
-        <li>
-            <h2>ABC Corp</h2>
-            <p><strong>Role:</strong> Software Engineer</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo urna sit amet elit euismod, ut bibendum felis vestibulum.</p>
-            <a href="#">Apply Now</a>
-        </li>
-        <li>
-            <h2>XYZ Ltd</h2>
-            <p><strong>Role:</strong> Data Analyst</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo urna sit amet elit euismod, ut bibendum felis vestibulum.</p>
-            <a href="#">Apply Now</a>
-        </li>
-        <!-- Add more job details -->
-    </ul>
+    <!--[if IE]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+    
+   
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--====== PRELOADER PART ENDS ======-->
+
+    <!--====== HEADER PART START ======-->
+
+    <header class="header-area header_shadow">
+        <div class="header-navbar">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="index.html">CareerCanvas</a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="toggler-icon"></span>
+                        <span class="toggler-icon"></span>
+                        <span class="toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="calander.html">Calander</a></li>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="resource.html">Resource</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li class="profile-section" id="profileSection">
+                                <div class="user-info" id="userInfo" style="display: none;">
+                                    <span id="userEmail" style="color: #526d82; margin-right: 10px;"></span>
+                                    <a href="profile.html" class="profile-link" style="color: #526d82; text-decoration: none; margin-right: 10px;">Profile</a>
+                                    <button onclick="logout()" class="logout-btn" style="background: none; border: none; color: #526d82; cursor: pointer;">Logout</button>
+                                </div>
+                                <div class="login-signup" id="loginSignup">
+                                    <a href="login.html" class="login-btn" style="color: #526d82; text-decoration: none; margin-right: 10px;">Login</a>
+                                    <a href="login.html" class="signup-btn" style="color: #526d82; text-decoration: none;">Sign Up</a>
+                                </div>
+                            </li>
+                        </ul> <!-- navbar nav -->
+                    </div>
+                </nav>
+            </div> <!-- container -->
+        </div> <!-- header navbar -->
+    </header>
+
+    <!--====== HEADER PART ENDS ======-->
+
+    <!--====== JOB LIST PART START ======-->
+
+    <section class="job-list-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="job-filter">
+                        <h3 class="filter-title">Filter Jobs</h3>
+                        
+                        <div class="filter-group">
+                            <label class="filter-label">Job Type</label>
+                            <select class="filter-select" id="jobType">
+                                <option value="">All Types</option>
+                                <option value="Full Time">Full Time</option>
+                                <option value="Part Time">Part Time</option>
+                                <option value="Contract">Contract</option>
+                                <option value="Internship">Internship</option>
+                                <option value="Freelance">Freelance</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label class="filter-label">Experience Level</label>
+                            <select class="filter-select" id="expLevel">
+                                <option value="">All Levels</option>
+                                <option value="Entry Level">Entry Level</option>
+                                <option value="Mid Level">Mid Level</option>
+                                <option value="Senior Level">Senior Level</option>
+                                <option value="Manager">Manager</option>
+                                <option value="Director">Director</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label class="filter-label">Location</label>
+                            <select class="filter-select" id="location">
+                                <option value="">All Locations</option>
+                                <option value="Remote">Remote</option>
+                                <option value="New York">New York</option>
+                                <option value="San Francisco">San Francisco</option>
+                                <option value="London">London</option>
+                                <option value="Berlin">Berlin</option>
+                                <option value="Singapore">Singapore</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <label class="filter-label">Salary Range</label>
+                            <select class="filter-select" id="salaryRange">
+                                <option value="">All Ranges</option>
+                                <option value="0-50000">$0 - $50,000</option>
+                                <option value="50000-80000">$50,000 - $80,000</option>
+                                <option value="80000-120000">$80,000 - $120,000</option>
+                                <option value="120000-150000">$120,000 - $150,000</option>
+                                <option value="150000+">$150,000+</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <button class="main-btn w-100" id="applyFilters">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-8">
+                    <div class="job-search">
+                        <input type="text" id="searchInput" placeholder="Search for jobs...">
+                        <button id="searchBtn"><i class="fa fa-search"></i></button>
+                    </div>
+                    
+                    <div id="jobListings">
+                        <!-- Job listings will be populated here -->
+                        
+                        <div class="job-card">
+                            <div class="job-card-header">
+                                <div class="job-card-logo">
+                                    <img src="assets/images/jobs-1.jpg" alt="Company Logo">
+                                </div>
+                                <div>
+                                    <h3 class="job-card-title">Senior UX Designer</h3>
+                                    <p class="job-card-company">Hooli</p>
+                                </div>
+                            </div>
+                            <div class="job-card-details">
+                                <span class="job-card-detail"><i class="fa fa-map-marker"></i> San Francisco</span>
+                                <span class="job-card-detail"><i class="fa fa-clock-o"></i> Full Time</span>
+                                <span class="job-card-detail"><i class="fa fa-briefcase"></i> Senior Level</span>
+                            </div>
+                            <div class="job-card-tags">
+                                <span class="job-tag">UX Design</span>
+                                <span class="job-tag">UI Design</span>
+                                <span class="job-tag">Figma</span>
+                                <span class="job-tag">Product Design</span>
+                            </div>
+                            <p>We're looking for a Senior UX Designer to join our product team. You'll be responsible for creating user-centered designs for our flagship product...</p>
+                            <div class="job-card-footer">
+                                <div class="job-card-salary">$120,000 - $150,000</div>
+                                <a href="job-details.html" class="main-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="job-card">
+                            <div class="job-card-header">
+                                <div class="job-card-logo">
+                                    <img src="assets/images/jobs-2.jpg" alt="Company Logo">
+                                </div>
+                                <div>
+                                    <h3 class="job-card-title">React Developer</h3>
+                                    <p class="job-card-company">PiedPiper</p>
+                                </div>
+                            </div>
+                            <div class="job-card-details">
+                                <span class="job-card-detail"><i class="fa fa-map-marker"></i> Remote</span>
+                                <span class="job-card-detail"><i class="fa fa-clock-o"></i> Full Time</span>
+                                <span class="job-card-detail"><i class="fa fa-briefcase"></i> Mid Level</span>
+                            </div>
+                            <div class="job-card-tags">
+                                <span class="job-tag">React</span>
+                                <span class="job-tag">JavaScript</span>
+                                <span class="job-tag">Redux</span>
+                                <span class="job-tag">TypeScript</span>
+                            </div>
+                            <p>PiedPiper is seeking a talented React Developer to build robust user interfaces for our compression platform. You'll work closely with our product team...</p>
+                            <div class="job-card-footer">
+                                <div class="job-card-salary">$90,000 - $120,000</div>
+                                <a href="job-details.html" class="main-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="job-card">
+                            <div class="job-card-header">
+                                <div class="job-card-logo">
+                                    <img src="assets/images/jobs-3.jpg" alt="Company Logo">
+                                </div>
+                                <div>
+                                    <h3 class="job-card-title">Marketing Specialist</h3>
+                                    <p class="job-card-company">Raviga Capital</p>
+                                </div>
+                            </div>
+                            <div class="job-card-details">
+                                <span class="job-card-detail"><i class="fa fa-map-marker"></i> New York</span>
+                                <span class="job-card-detail"><i class="fa fa-clock-o"></i> Full Time</span>
+                                <span class="job-card-detail"><i class="fa fa-briefcase"></i> Mid Level</span>
+                            </div>
+                            <div class="job-card-tags">
+                                <span class="job-tag">Digital Marketing</span>
+                                <span class="job-tag">Content Strategy</span>
+                                <span class="job-tag">SEO</span>
+                                <span class="job-tag">Analytics</span>
+                            </div>
+                            <p>Raviga Capital is looking for a Marketing Specialist to develop and implement marketing strategies for our venture capital firm. The ideal candidate will have experience in digital marketing...</p>
+                            <div class="job-card-footer">
+                                <div class="job-card-salary">$80,000 - $100,000</div>
+                                <a href="job-details.html" class="main-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="job-card">
+                            <div class="job-card-header">
+                                <div class="job-card-logo">
+                                    <img src="assets/images/jobs-4.jpg" alt="Company Logo">
+                                </div>
+                                <div>
+                                    <h3 class="job-card-title">Data Scientist</h3>
+                                    <p class="job-card-company">Endframe</p>
+                                </div>
+                            </div>
+                            <div class="job-card-details">
+                                <span class="job-card-detail"><i class="fa fa-map-marker"></i> Boston</span>
+                                <span class="job-card-detail"><i class="fa fa-clock-o"></i> Full Time</span>
+                                <span class="job-card-detail"><i class="fa fa-briefcase"></i> Senior Level</span>
+                            </div>
+                            <div class="job-card-tags">
+                                <span class="job-tag">Python</span>
+                                <span class="job-tag">Machine Learning</span>
+                                <span class="job-tag">SQL</span>
+                                <span class="job-tag">TensorFlow</span>
+                            </div>
+                            <p>Join our data science team at Endframe to build and deploy machine learning models that drive business decisions. You'll work on challenging problems in the cloud computing space...</p>
+                            <div class="job-card-footer">
+                                <div class="job-card-salary">$130,000 - $160,000</div>
+                                <a href="job-details.html" class="main-btn">View Details</a>
+                            </div>
+                        </div>
+                        
+                        <div class="job-card">
+                            <div class="job-card-header">
+                                <div class="job-card-logo">
+                                    <img src="assets/images/jobs-5.jpg" alt="Company Logo">
+                                </div>
+                                <div>
+                                    <h3 class="job-card-title">Product Manager</h3>
+                                    <p class="job-card-company">Palo Alto Electric</p>
+                                </div>
+                            </div>
+                            <div class="job-card-details">
+                                <span class="job-card-detail"><i class="fa fa-map-marker"></i> Palo Alto</span>
+                                <span class="job-card-detail"><i class="fa fa-clock-o"></i> Full Time</span>
+                                <span class="job-card-detail"><i class="fa fa-briefcase"></i> Manager</span>
+                            </div>
+                            <div class="job-card-tags">
+                                <span class="job-tag">Product Management</span>
+                                <span class="job-tag">Agile</span>
+                                <span class="job-tag">B2B SaaS</span>
+                                <span class="job-tag">Technology</span>
+                            </div>
+                            <p>Palo Alto Electric is seeking an experienced Product Manager to lead product development for our electric vehicle charging solutions. You'll be working cross-functionally with engineering, design, and marketing teams...</p>
+                            <div class="job-card-footer">
+                                <div class="job-card-salary">$140,000 - $170,000</div>
+                                <a href="job-details.html" class="main-btn">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="pagination">
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== JOB LIST PART ENDS ======-->
+
+    <!--====== FOOTER PART START ======-->
+
+    <footer class="footer_area gray-bg">
+        <div class="footer_widget pt-30 pb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">Quick Links</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">For Candidates</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">For Employers</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_contact mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">Contact Us</h5>
+                            </div>
+                            <ul class="contact">
+                                <li>
+                                    <p><span>Location: </span> 2750 Quadra Street Victoria, Canada</p>
+                                </li>
+                                <li>
+                                    <p><span>Email: </span> info.jobs@example.com</p>
+                                </li>
+                                <li>
+                                    <p><span>Phone: </span> +880-1234-515</p>
+                                </li>
+                            </ul>
+                            <ul class="social">
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- footer widget -->
+
+        <div class="footer_copyright">
+            <div class="container">
+                <div class="copyright_content text-center d-sm-flex justify-content-between align-items-center">
+                    <a href="#" class="logo">CareerCanvas</a>
+                    <p class="copyright">CareerCanvas © 2024 All Right Reserved</p>
+                </div> <!-- copyright content -->
+            </div> <!-- container -->
+        </div> <!-- footer copyright -->
+    </footer>
+
+    <!--====== FOOTER PART ENDS ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== Jquery js ======-->
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!--====== Nice Select js ======-->
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+
+    <!--====== Counter Up js ======-->
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.js"></script>
+
+    <!--====== Main js ======-->
+    <script src="assets/js/main.js"></script>
+    <script src="index.js"></script>
+
+    <!-- Application Form Modal -->
+    <div class="application-modal" id="applicationModal">
+        <div class="application-form-container">
+            <div class="application-form" id="applicationFormContent">
+                <div class="application-form-header">
+                    <h2>Apply for Position</h2>
+                    <button class="application-form-close" onclick="closeApplicationModal()">&times;</button>
+                </div>
+                
+                <div class="application-form-job-info" id="jobInfoSection">
+                    <!-- Job info will be populated dynamically -->
+                </div>
+                
+                <form id="jobApplicationForm">
+                    <input type="hidden" id="hiddenCompany" name="company">
+                    <input type="hidden" id="hiddenPosition" name="position">
+                    <input type="hidden" id="hiddenSalary" name="salary">
+                    <input type="hidden" id="hiddenLocation" name="location">
+                    <input type="hidden" id="hiddenJobType" name="jobType">
+                    <input type="hidden" id="hiddenJobUrl" name="jobUrl">
+                    
+                    <div class="application-form-section">
+                        <h4>Personal Information</h4>
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="application-form-section">
+                        <h4>Application Details</h4>
+                        <div class="form-group">
+                            <label for="applicationDate">Application Date</label>
+                            <input type="date" id="applicationDate" name="applicationDate" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="coverletter">Cover Letter / Additional Notes</label>
+                            <textarea id="coverletter" name="coverletter" rows="4" placeholder="Briefly explain why you're a good fit for this position"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="application-form-section interview-schedule-section">
+                        <h4>Interview Schedule</h4>
+                        <p>When would you be available for an interview?</p>
+                        
+                        <div class="form-group">
+                            <label for="interviewDate">Preferred Interview Date</label>
+                            <input type="date" id="interviewDate" name="interviewDate">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interviewTime">Preferred Interview Time</label>
+                            <input type="time" id="interviewTime" name="interviewTime">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="interviewPreference">Interview Preference</label>
+                            <select id="interviewPreference" name="interviewPreference">
+                                <option value="remote">Remote / Virtual</option>
+                                <option value="in-person">In-Person</option>
+                                <option value="phone">Phone Call</option>
+                                <option value="flexible">Flexible</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-application-btn">Submit Application</button>
+                </form>
+            </div>
+            
+            <div class="application-success" id="applicationSuccess">
+                <i class="fa fa-check-circle"></i>
+                <h3>Application Submitted Successfully!</h3>
+                <p>Your application has been received. The interview has been scheduled and added to your calendar.</p>
+                <div>
+                    <p><strong>Interview Details:</strong></p>
+                    <p id="confirmationCompany">Company: <span></span></p>
+                    <p id="confirmationPosition">Position: <span></span></p>
+                    <p id="confirmationDate">Date: <span></span></p>
+                    <p id="confirmationTime">Time: <span></span></p>
+                </div>
+                <a href="calander.html" class="view-calendar-btn">View Calendar</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const userInfo = document.getElementById('userInfo');
+            const loginSignup = document.getElementById('loginSignup');
+            const userEmail = document.getElementById('userEmail');
+
+            if (currentUser) {
+                userInfo.style.display = 'flex';
+                loginSignup.style.display = 'none';
+                userEmail.textContent = currentUser.email;
+            } else {
+                userInfo.style.display = 'none';
+                loginSignup.style.display = 'flex';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        // Get job application data from localStorage
+        function getJobApplications() {
+            try {
+                const applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+                return Array.isArray(applications) ? applications : [];
+            } catch (error) {
+                console.error('Error parsing job applications:', error);
+                return [];
+            }
+        }
+
+        // Function to open the application modal
+        function openApplicationModal(jobData) {
+            // Populate job info section
+            const jobInfoSection = document.getElementById('jobInfoSection');
+            jobInfoSection.innerHTML = `
+                <h3>${jobData.position}</h3>
+                <p>${jobData.company}</p>
+                <div class="application-form-job-details">
+                    <span class="job-detail-badge"><i class="fa fa-map-marker"></i> ${jobData.location}</span>
+                    <span class="job-detail-badge"><i class="fa fa-clock-o"></i> ${jobData.jobType}</span>
+                    <span class="job-detail-badge"><i class="fa fa-money"></i> ${jobData.salary}</span>
+                </div>
+            `;
+            
+            // Set hidden form fields
+            document.getElementById('hiddenCompany').value = jobData.company;
+            document.getElementById('hiddenPosition').value = jobData.position;
+            document.getElementById('hiddenSalary').value = jobData.salary;
+            document.getElementById('hiddenLocation').value = jobData.location;
+            document.getElementById('hiddenJobType').value = jobData.jobType;
+            document.getElementById('hiddenJobUrl').value = jobData.jobUrl;
+            
+            // Set default application date to today
+            const today = new Date();
+            document.getElementById('applicationDate').value = formatDate(today);
+            
+            // Set default interview date to 7 days from now
+            const interviewDefaultDate = new Date();
+            interviewDefaultDate.setDate(today.getDate() + 7);
+            document.getElementById('interviewDate').value = formatDate(interviewDefaultDate);
+            
+            // Pre-fill email if user is logged in
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser && currentUser.email) {
+                document.getElementById('email').value = currentUser.email;
+                
+                // If we have user's name in localStorage, use it
+                if (currentUser.name) {
+                    document.getElementById('fullName').value = currentUser.name;
+                }
+            }
+            
+            // Show the modal
+            const modal = document.getElementById('applicationModal');
+            modal.style.display = 'flex';
+            
+            // Reset form view (hide success message, show form)
+            document.getElementById('applicationFormContent').style.display = 'block';
+            document.getElementById('applicationSuccess').style.display = 'none';
+        }
+        
+        // Function to close the application modal
+        function closeApplicationModal() {
+            document.getElementById('applicationModal').style.display = 'none';
+            // Reset form
+            document.getElementById('jobApplicationForm').reset();
+        }
+        
+        // Apply for job function
+        function applyForJob(jobData) {
+            try {
+                // Check if user is logged in
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (!currentUser) {
+                    alert('Please login to apply for jobs');
+                    window.location.href = 'login.html';
+                    return;
+                }
+                
+                // Open the application modal
+                openApplicationModal(jobData);
+            } catch (error) {
+                console.error('Error opening application form:', error);
+                alert('There was an error processing your request. Please try again.');
+            }
+        }
+        
+        // Handle job application form submission
+        document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            try {
+                // Get form data
+                const formData = new FormData(this);
+                const applicationData = {
+                    company: formData.get('company'),
+                    position: formData.get('position'),
+                    location: formData.get('location'),
+                    jobType: formData.get('jobType'),
+                    salary: formData.get('salary'),
+                    jobUrl: formData.get('jobUrl'),
+                    fullName: formData.get('fullName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    applicationDate: formData.get('applicationDate'),
+                    coverLetter: formData.get('coverletter'),
+                    interviewDate: formData.get('interviewDate'),
+                    interviewTime: formData.get('interviewTime'),
+                    interviewPreference: formData.get('interviewPreference'),
+                    userId: JSON.parse(localStorage.getItem('currentUser')).email
+                };
+                
+                // Add application to localStorage
+                const applications = getJobApplications();
+                applications.push(applicationData);
+                localStorage.setItem('jobApplications', JSON.stringify(applications));
+                
+                // Show success message
+                document.getElementById('applicationFormContent').style.display = 'none';
+                document.getElementById('applicationSuccess').style.display = 'block';
+                
+                // Update confirmation details
+                document.querySelector('#confirmationCompany span').textContent = applicationData.company;
+                document.querySelector('#confirmationPosition span').textContent = applicationData.position;
+                
+                // Format the date for display
+                const interviewDate = new Date(applicationData.interviewDate);
+                document.querySelector('#confirmationDate span').textContent = interviewDate.toDateString();
+                document.querySelector('#confirmationTime span').textContent = applicationData.interviewTime;
+                
+            } catch (error) {
+                console.error('Error submitting application:', error);
+                alert('There was an error submitting your application. Please try again.');
+            }
+        });
+        
+        // Add click event handlers to all "View Details" buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const applyButtons = document.querySelectorAll('.job-card .main-btn');
+            applyButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Get job data from the job card
+                    const jobCard = this.closest('.job-card');
+                    const company = jobCard.querySelector('.job-card-company').textContent;
+                    const position = jobCard.querySelector('.job-card-title').textContent;
+                    const jobUrl = this.getAttribute('href');
+                    
+                    // Get additional job details
+                    const locationEl = jobCard.querySelector('.job-card-detail:nth-child(1)');
+                    const jobTypeEl = jobCard.querySelector('.job-card-detail:nth-child(2)');
+                    const salaryEl = jobCard.querySelector('.job-card-salary');
+                    
+                    const location = locationEl ? locationEl.textContent.replace('map-marker', '').trim() : 'Remote';
+                    const jobType = jobTypeEl ? jobTypeEl.textContent.replace('clock-o', '').trim() : 'Full Time';
+                    const salary = salaryEl ? salaryEl.textContent.trim() : 'Competitive salary';
+                    
+                    // Prevent default navigation
+                    e.preventDefault();
+                    
+                    // Apply for job with all details
+                    applyForJob({
+                        company: company,
+                        position: position,
+                        jobUrl: jobUrl,
+                        location: location,
+                        jobType: jobType,
+                        salary: salary
+                    });
+                });
+            });
+            
+            // Add event handler for the job application form submission
+            document.getElementById('applicationForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(this);
+                const company = formData.get('company');
+                const position = formData.get('position');
+                const interviewDate = formData.get('interviewDate');
+                const interviewTime = formData.get('interviewTime');
+                const name = formData.get('name');
+                const email = formData.get('email');
+                const resume = formData.get('resume').name || 'Resume uploaded';
+                const coverLetter = formData.get('coverLetter').name || 'Cover letter uploaded';
+                
+                // Save application to local storage (in a real app, you would send to server)
+                const applications = JSON.parse(localStorage.getItem('applications') || '[]');
+                applications.push({
+                    company,
+                    position,
+                    interviewDate,
+                    interviewTime,
+                    name,
+                    email,
+                    resume,
+                    coverLetter,
+                    appliedDate: new Date().toISOString()
+                });
+                localStorage.setItem('applications', JSON.stringify(applications));
+                
+                // Save interview to calendar events
+                const calendarEvents = JSON.parse(localStorage.getItem('calendarEvents') || '[]');
+                calendarEvents.push({
+                    title: `Interview: ${position} at ${company}`,
+                    date: interviewDate,
+                    time: interviewTime,
+                    type: 'interview'
+                });
+                localStorage.setItem('calendarEvents', JSON.stringify(calendarEvents));
+                
+                // Close modal
+                closeApplicationModal();
+                
+                // Show success message
+                const successMessage = document.createElement('div');
+                successMessage.className = 'alert alert-success application-success';
+                successMessage.innerHTML = `
+                    <h4>Application Submitted Successfully!</h4>
+                    <p>Your application for <strong>${position}</strong> at <strong>${company}</strong> has been submitted.</p>
+                    <p>Interview scheduled for: <strong>${interviewDate}</strong> at <strong>${interviewTime}</strong></p>
+                    <p>We've added this to your calendar in the Calendar section.</p>
+                    <button class="btn btn-sm btn-success" onclick="this.parentNode.remove()">Dismiss</button>
+                `;
+                document.querySelector('.job-list').prepend(successMessage);
+                
+                // Scroll to top to show success message
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Close application modal when clicking the close button
+            document.getElementById('closeApplicationModal').addEventListener('click', function() {
+                closeApplicationModal();
+            });
+
+            // Close application modal when clicking outside the modal content
+            document.getElementById('applicationModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeApplicationModal();
+                }
+            });
+            
+            // Initialize job filtering functionality
+            if (document.getElementById('searchBtn')) {
+                document.getElementById('searchBtn').addEventListener('click', function() {
+                    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                    // Implement search functionality here
+                    console.log('Searching for:', searchTerm);
+                    // In a real implementation, you would filter jobs based on the search term
+                });
+            }
+            
+            if (document.getElementById('applyFilters')) {
+                document.getElementById('applyFilters').addEventListener('click', function() {
+                    const jobType = document.getElementById('jobType').value;
+                    const expLevel = document.getElementById('expLevel').value;
+                    const location = document.getElementById('location').value;
+                    const salaryRange = document.getElementById('salaryRange').value;
+                    
+                    // Implement filter functionality here
+                    console.log('Filters applied:', { jobType, expLevel, location, salaryRange });
+                    // In a real implementation, you would filter jobs based on these criteria
+                });
+            }
+        });
+
+        // Check auth status when page loads
+        window.onload = checkAuth;
+
+        // Format date to YYYY-MM-DD
+        function formatDate(date) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+    </script>
 </body>
-</html>
+
+</html> 

@@ -31,16 +31,68 @@
     <!--====== Style CSS ======-->
     <link rel="stylesheet" href="assets/css/style.css">
 
-
-
-
+    <style>
+        .faq-section {
+            padding: 80px 0;
+        }
+        .faq-title {
+            margin-bottom: 40px;
+        }
+        .accordion {
+            margin-bottom: 60px;
+        }
+        .accordion .card {
+            border: none;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .accordion .card-header {
+            background-color: #f8f9fa;
+            padding: 0;
+            border: none;
+        }
+        .accordion .card-header button {
+            width: 100%;
+            text-align: left;
+            padding: 20px;
+            font-weight: 600;
+            color: #333;
+            text-decoration: none;
+            position: relative;
+            background: none;
+            border: none;
+        }
+        .accordion .card-header button:after {
+            content: "\f107";
+            font-family: 'FontAwesome';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s;
+        }
+        .accordion .card-header button[aria-expanded="true"]:after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+        .accordion .card-body {
+            padding: 0 20px 20px;
+            line-height: 1.7;
+        }
+        .category-title {
+            margin: 30px 0 20px;
+            color: #0067da;
+        }
+    </style>
 </head>
 
 <body>
     <!--[if IE]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-
+    
+   
     <!--====== PRELOADER PART START ======-->
 
     <div class="preloader">
@@ -64,12 +116,12 @@
 
     <!--====== HEADER PART START ======-->
 
-    <header class="header-area">
+    <header class="header-area header_shadow">
         <div class="header-navbar">
             <div class="container">
                 <nav class="navbar navbar-expand-lg">
                     <a class="navbar-brand" href="index.html">CareerCanvas</a>
-
+                    
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="toggler-icon"></span>
                         <span class="toggler-icon"></span>
@@ -79,236 +131,216 @@
                     <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                         <ul class="navbar-nav ml-auto">
                             <li><a href="index.html">Home</a></li>
-                            <li class="active">
-                                <!-- <a href="#">Page</a>
-
-                                <ul class="sub-menu">
-                                    <li><a href="about.html">About</a></li>
-                                    <li><a href="job-list.html">Job Page</a></li>
-                                    <li><a href="job-details.html">Job Details</a></li>
-                                    <li><a href="resume.html">Resume Page</a></li>
-                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li class="active"><a href="faq.html">FAQ</a></li>
-                                    <li><a href="pricing.html">Pricing Tables</a></li>
-                                    <li><a href="change-password.html">Change Password</a></li>
-                                    <li><a href="notifications.html">Notifications</a></li>
-                                    <li><a href="register.html">Register</a></li>
-                                </ul> -->
-                            </li>
-                            <li>
-                                <a href="calander.html">Calander</a>
-                                
-                                <!-- <ul class="sub-menu">
-                                    <li><a href="browse-categories.html">Browse Categories</a></li>
-                                    <li><a href="bookmarked.html">Bookmarked</a></li>
-                                    <li><a href="add-resume.html">Add Resume</a></li>
-                                    <li><a href="manage-resume.html">Manage Resumes</a></li>
-                                    <li><a href="job-alerts.html">Job Alerts</a></li>
-                                </ul> -->
-                            </li>
-                            <li>
-                                <a href="#">Company</a>
-                                
-                                <!-- <ul class="sub-menu">
-                                    <li><a href="post-job.html">Post Job</a></li>
-                                    <li><a href="manage-jobs.html">Manage Jobs</a></li>
-                                    <li><a href="manage-applications.html">Manage Applications</a></li>
-                                    <li><a href="browse-resumes.html">Browse Resumes</a></li>
-                                </ul> -->
-                            </li>
-                            <li>
-                                <a href="resource.html">Resource</a>
-                                
-                                <!-- <ul class="sub-menu">
-                                    <li><a href="blog.html">Blog</a></li>
-                                    <li><a href="blog-details.html">Blog Details</a></li>
-                                </ul> -->
-                            </li>
+                            <li><a href="calander.html">Calander</a></li>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="resource.html">Resource</a></li>
                             <li><a href="contact.html">Contact</a></li>
-                            <!-- <li><a href="login.html">Log In</a></li> -->
-                            <li><a href="faq.html">FAQ</a></li>
-
-                            <li><a class="main-btn" href="profile.html"><img src="assets/images/user.png" alt=""></a></li>
+                            <li class="active"><a href="faq.html">FAQ</a></li>
+                            <li class="profile-section" id="profileSection">
+                                <div class="user-info" id="userInfo" style="display: none;">
+                                    <span id="userEmail" style="color: #526d82; margin-right: 10px;"></span>
+                                    <a href="profile.html" class="profile-link" style="color: #526d82; text-decoration: none; margin-right: 10px;">Profile</a>
+                                    <button onclick="logout()" class="logout-btn" style="background: none; border: none; color: #526d82; cursor: pointer;">Logout</button>
+                                </div>
+                                <div class="login-signup" id="loginSignup">
+                                    <a href="login.html" class="login-btn" style="color: #526d82; text-decoration: none; margin-right: 10px;">Login</a>
+                                    <a href="login.html" class="signup-btn" style="color: #526d82; text-decoration: none;">Sign Up</a>
+                                </div>
+                            </li>
                         </ul> <!-- navbar nav -->
                     </div>
-
-                    <!-- <div class="language">
-                        <div class="dropdown">
-                            <button class="language_btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">en </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a href="#">English</a>
-                                <a href="#">Deutsch</a>
-                                <a href="#">Русский</a>
-                                <a href="#">Español</a>
-                                <a href="#">Français</a>
-                            </div>
-                        </div>
-                    </div>  -->
                 </nav>
             </div> <!-- container -->
         </div> <!-- header navbar -->
-
-        <div class="page_banner bg_cover" style="background-image: url(assets/images/page_banner.jpg)">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="banner_content d-sm-flex align-items-center justify-content-between">
-                            <div class="content">
-                                <h3 class="page_title">FAQ</h3>
-                                <p>More than 6 million jobseekers turn to Fitcareer in their search for work, making over 150,000 applications every day.</p>
-                            </div> <!-- content -->
-                            <div class="banner_btn">
-                                <a class="main-btn " href="#">75K JOBS</a>
-                            </div> <!-- banner btn -->
-                        </div> <!-- banner content -->
-                    </div>
-                </div> <!-- row -->
-            </div> <!-- container -->
-        </div> <!-- page banner -->
     </header>
 
     <!--====== HEADER PART ENDS ======-->
 
     <!--====== FAQ PART START ======-->
-    <!-- <section class="top_companies pt-75">
+
+    <section class="faq-section">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-7">
-                    <div class="section_title text-center pb-25">
-                        <h5 class="sub_title">Purchase Now</h5>
-                        <h3 class="main_title">You are Using Free Lite Version</h3>
-                    </div> 
+                <div class="col-lg-8">
+                    <div class="faq-title text-center">
+                        <h2>Frequently Asked Questions</h2>
+                        <p>Find answers to common questions about using CareerCanvas and job searching</p>
+                    </div>
                 </div>
-            </div> 
-                        <div class="text-center">
-
-            <p>You are using free lite version of JobMate, please purchase full version to get all pages, features and commercial license</p></br>
-
-            <a class="main-btn" href="https://rebrand.ly/jobmate-gg" rel="nofollow">Purchase Now</a>
-            </br>
-                
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h3 class="category-title">About CareerCanvas</h3>
+                    <div class="accordion" id="aboutAccordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What is CareerCanvas?
+                                </button>
+                            </div>
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#aboutAccordion">
+                                <div class="card-body">
+                                    CareerCanvas is a comprehensive job portal that connects job seekers with employers. Our platform offers tools for job searching, application tracking, career resources, and more to help you advance in your career journey.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwo">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Is CareerCanvas free to use?
+                                </button>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#aboutAccordion">
+                                <div class="card-body">
+                                    Yes, CareerCanvas offers a free basic account for job seekers. Premium features may be available for a subscription fee. Companies and recruiters may have different pricing plans for posting jobs and accessing candidate databases.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingThree">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Who can use CareerCanvas?
+                                </button>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#aboutAccordion">
+                                <div class="card-body">
+                                    CareerCanvas is designed for both job seekers and employers. Whether you're a recent graduate, experienced professional, career changer, or a company looking to hire talent, our platform has features to meet your needs.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="category-title">Job Search & Applications</h3>
+                    <div class="accordion" id="jobAccordion">
+                        <div class="card">
+                            <div class="card-header" id="headingFour">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                    How do I search for jobs on CareerCanvas?
+                                </button>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#jobAccordion">
+                                <div class="card-body">
+                                    You can search for jobs using the search bar on our homepage. Enter keywords, job titles, or company names, and you can filter results by location, job type, experience level, and more. You can also browse jobs by category from our job categories section.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingFive">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                    How do I apply for a job?
+                                </button>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#jobAccordion">
+                                <div class="card-body">
+                                    Once you find a job you're interested in, click on the "Apply Now" button on the job listing. You'll need to have an account and be logged in. Some applications may be completed directly on CareerCanvas, while others may redirect you to the employer's website.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingSix">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                    Can I track my job applications?
+                                </button>
+                            </div>
+                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#jobAccordion">
+                                <div class="card-body">
+                                    Yes, you can track all your applications through your profile dashboard. You'll be able to see the status of each application, any messages from employers, and set reminders for follow-ups.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="category-title">Account & Profile</h3>
+                    <div class="accordion" id="accountAccordion">
+                        <div class="card">
+                            <div class="card-header" id="headingSeven">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                                    How do I create an account?
+                                </button>
+                            </div>
+                            <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accountAccordion">
+                                <div class="card-body">
+                                    Click on "Sign Up" in the top navigation bar. You can create an account using your email address and a password. Fill in the required information and follow the prompts to complete your registration.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingEight">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                                    How do I update my profile?
+                                </button>
+                            </div>
+                            <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accountAccordion">
+                                <div class="card-body">
+                                    Log in to your account and navigate to your profile page. Click on the "Edit Profile" button to update your personal information, work experience, education, skills, and other details. Don't forget to save your changes.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingNine">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                                    How can I delete my account?
+                                </button>
+                            </div>
+                            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accountAccordion">
+                                <div class="card-body">
+                                    To delete your account, go to your profile settings and look for the "Account Management" section. There should be an option to delete your account. Please note that this action is permanent and all your data will be removed from our system.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h3 class="category-title">For Employers</h3>
+                    <div class="accordion" id="employerAccordion">
+                        <div class="card">
+                            <div class="card-header" id="headingTen">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                                    How do I post a job?
+                                </button>
+                            </div>
+                            <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#employerAccordion">
+                                <div class="card-body">
+                                    Log in to your employer account and click on "Post a New Job" from your dashboard. Fill in the job details including title, description, requirements, benefits, and application instructions. Review and publish your listing when ready.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingEleven">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">
+                                    How can I manage applications?
+                                </button>
+                            </div>
+                            <div id="collapseEleven" class="collapse" aria-labelledby="headingEleven" data-parent="#employerAccordion">
+                                <div class="card-body">
+                                    You can view and manage all applications through your employer dashboard. Sort and filter candidates, add notes, change application statuses, and communicate with applicants directly through our platform.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingTwelve">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">
+                                    What pricing plans are available for employers?
+                                </button>
+                            </div>
+                            <div id="collapseTwelve" class="collapse" aria-labelledby="headingTwelve" data-parent="#employerAccordion">
+                                <div class="card-body">
+                                    We offer various subscription plans for employers based on your hiring needs. Plans range from basic job postings to premium packages with features like featured listings, candidate search access, and analytics. Contact our sales team for detailed pricing information.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h4>Still have questions?</h4>
+                    <p>If you couldn't find the answer to your question, please contact our support team.</p>
+                    <a href="contact.html" class="main-btn mt-4">Contact Support</a>
+                </div>
             </div>
         </div>
-    </section> -->
-    <section class="faq_area pt-50 pb-80">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="faq_accordion">
-                        <div class="accordion" id="accordionOne">
-                            <div class="card">
-                                <div class="card-header" id="headingOne">
-                                    <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"> How do I place an ad?</a>
-                                </div>
-
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionOne">
-                                    <div class="card-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit amet ante nec vulputate. Nulla aliquam, justo auctor consequat tincidunt, arcu erat mattis lorem, lacinia lacinia dui enim at eros. Pellentesque ut gravida augue. Duis ac dictum tellus <br> <br> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt alqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim ke ffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                            <div class="card">
-                                <div class="card-header" id="headingTwo">
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Who shouldi to contact if i Have any question?</a>
-                                </div>
-                                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionOne">
-                                    <div class="card-body">
-                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt alqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim ke ffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. <br> <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit amet ante nec vulputate. Nulla aliquam, justo auctor consequat tincidunt, arcu erat mattis lorem, lacinia lacinia dui enim at eros. Pellentesque ut gravida augue. Duis ac dictum tellus</p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                            <div class="card">
-                                <div class="card-header" id="headingThree">
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">How can i cancel or change my order?</a>
-                                </div>
-                                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionOne">
-                                    <div class="card-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas expedita, repellendus est nemo cum quibusdam optio, voluptate hic a tempora facere, nihil non itaque alias similique quas quam odit consequatur. </p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                            <div class="card">
-                                <div class="card-header" id="headingFour">
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">How can i Return A Product?</a>
-                                </div>
-                                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionOne">
-                                    <div class="card-body">
-                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt alqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim ke ffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. <br> <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit amet ante nec vulputate. Nulla aliquam, justo auctor consequat tincidunt, arcu erat mattis lorem, lacinia lacinia dui enim at eros. Pellentesque ut gravida augue. Duis ac dictum tellus</p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                            <div class="card">
-                                <div class="card-header" id="headingFive">
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">How Long will it take to get my package?</a>
-                                </div>
-                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionOne">
-                                    <div class="card-body">
-                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt alqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. </p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                        </div> <!-- accordion -->
-                    </div> <!-- faq accordion -->
-                </div>
-                <div class="col-lg-6">
-                    <div class="faq_accordion">
-                        <div class="accordion" id="accordionTwo">
-                            <div class="card">
-                                <div class="card-header" id="headingSix">
-                                    <a href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix"> How do I place an ad?</a>
-                                </div>
-
-                                <div id="collapseSix" class="collapse show" aria-labelledby="headingSix" data-parent="#accordionTwo">
-                                    <div class="card-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit amet ante nec vulputate. Nulla aliquam, justo auctor consequat tincidunt, arcu erat mattis lorem, lacinia lacinia dui enim at eros. Pellentesque ut gravida augue. Duis ac dictum tellus <br> <br> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt alqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim ke ffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                            <div class="card">
-                                <div class="card-header" id="headingSeven">
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">Who shouldi to contact if i Have any question?</a>
-                                </div>
-                                <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionTwo">
-                                    <div class="card-body">
-                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt alqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim ke ffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. <br> <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit amet ante nec vulputate. Nulla aliquam, justo auctor consequat tincidunt, arcu erat mattis lorem, lacinia lacinia dui enim at eros. Pellentesque ut gravida augue. Duis ac dictum tellus</p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                            <div class="card">
-                                <div class="card-header" id="headingEight">
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">How can i cancel or change my order?</a>
-                                </div>
-                                <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionTwo">
-                                    <div class="card-body">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptas expedita, repellendus est nemo cum quibusdam optio, voluptate hic a tempora facere, nihil non itaque alias similique quas quam odit consequatur. </p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                            <div class="card">
-                                <div class="card-header" id="headingNine">
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">How can i Return A Product?</a>
-                                </div>
-                                <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionTwo">
-                                    <div class="card-body">
-                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt alqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim ke ffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. <br> <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consectetur sit amet ante nec vulputate. Nulla aliquam, justo auctor consequat tincidunt, arcu erat mattis lorem, lacinia lacinia dui enim at eros. Pellentesque ut gravida augue. Duis ac dictum tellus</p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                            <div class="card">
-                                <div class="card-header" id="headingTen">
-                                    <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">How Long will it take to get my package?</a>
-                                </div>
-                                <div id="collapseTen" class="collapse" aria-labelledby="headingTen" data-parent="#accordionTwo">
-                                    <div class="card-body">
-                                        <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute. non cupidatat skateboard dolor brunch. Foosd truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt alqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. </p>
-                                    </div>
-                                </div>
-                            </div> <!-- card -->
-                        </div> <!-- accordion -->
-                    </div> <!-- faq accordion -->
-                </div>
-            </div> <!-- row -->
-        </div> <!-- container -->
     </section>
 
     <!--====== FAQ PART ENDS ======-->
@@ -337,7 +369,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="footer_link mt-45">
                             <div class="footer_title">
-                                <h5 class="title">For Candidade</h5>
+                                <h5 class="title">For Candidates</h5>
                             </div>
                             <ul class="link">
                                 <li><a href="#">Job Packages</a></li>
@@ -352,7 +384,7 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="footer_link mt-45">
                             <div class="footer_title">
-                                <h5 class="title">For Employee</h5>
+                                <h5 class="title">For Employers</h5>
                             </div>
                             <ul class="link">
                                 <li><a href="#">Job Packages</a></li>
@@ -409,31 +441,6 @@
 
     <!--====== BACK TOP TOP PART ENDS ======-->
 
-    <!--====== OVERLAY PART START ======-->
-
-    <div class="overlay"></div>
-
-    <!--====== OVERLAY PART ENDS ======-->
-
-    <!--====== PART START ======-->
-
-    <!--
-    <section class="">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-">
-                    
-                </div>
-            </div>
-        </div>
-    </section>
--->
-
-    <!--====== PART ENDS ======-->
-
-    <!-- row -->
-
-
     <!--====== Jquery js ======-->
     <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
     <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
@@ -442,7 +449,6 @@
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 
-
     <!--====== Nice Select js ======-->
     <script src="assets/js/jquery.nice-select.min.js"></script>
 
@@ -450,10 +456,36 @@
     <script src="assets/js/waypoints.min.js"></script>
     <script src="assets/js/jquery.counterup.js"></script>
 
-
     <!--====== Main js ======-->
     <script src="assets/js/main.js"></script>
 
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const userInfo = document.getElementById('userInfo');
+            const loginSignup = document.getElementById('loginSignup');
+            const userEmail = document.getElementById('userEmail');
+
+            if (currentUser) {
+                userInfo.style.display = 'flex';
+                loginSignup.style.display = 'none';
+                userEmail.textContent = currentUser.email;
+            } else {
+                userInfo.style.display = 'none';
+                loginSignup.style.display = 'flex';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        // Check auth status when page loads
+        window.onload = checkAuth;
+    </script>
 </body>
 
-</html>
+</html> 

@@ -1,99 +1,565 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resources</title>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CareerCanvas | Resources</title>
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="assets/images/favicon.ico" type="image/png">
+
+    <!--====== Flaticon CSS ======-->
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+
+    <!--====== Font Awesome CSS ======-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <!--====== Default CSS ======-->
+    <link rel="stylesheet" href="assets/css/default.css">
+
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/resource.css">
+
     <style>
-         @import url("https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,700&display=swap");
-       body {
-          font-family: "Open Sans", sans-serif;
-          font-weight: normal;
-          font-style: normal;
-          background-color: #DDE6ED;
-      }
-        .card {
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            background-color: #f9f9f9;
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #f5f7fa;
         }
-        .card h2 {
-            margin-top: 0;
-            font-size: 1.2em;
+        .resource-section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: 700;
             color: #333;
+            margin-bottom: 10px;
         }
-        .card p {
-            color: #555;
+        .section-title p {
+            color: #777;
+            font-size: 16px;
         }
-        .card a {
+        .resource-category {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        .resource-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+        .resource-category h3 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .resource-category p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .resource-list {
+            list-style: none;
+            padding: 0;
+        }
+        .resource-list li {
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+        .resource-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .resource-list a {
+            color: #0067da;
             text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
         }
-        .card a:hover {
-            text-decoration: underline;
+        .resource-list a:hover {
+            color: #0056b3;
+        }
+        .resource-list a i {
+            margin-right: 10px;
+            color: #0067da;
+        }
+        .resource-description {
+            color: #777;
+            font-size: 14px;
+            margin-top: 5px;
+            margin-left: 25px;
+        }
+        .preloader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('assets/images/loader.gif') center no-repeat #fff;
+        }
+
+        .resource-card {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-card .card-body {
+            padding: 20px;
+        }
+
+        .resource-card .card-title {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .resource-card .card-text {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .resource-card .btn {
+            background-color: #007bff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        .resource-card .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .resource-section {
+            padding: 50px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            color: #333;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: #007bff;
+        }
+
+        .category-title {
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            color: #444;
         }
     </style>
 </head>
+
 <body>
-    <h1>Resources</h1>
+    <div class="preloader"></div>
 
-    <div class="card">
-        <h2>Aptitude Tests</h2>
-        <p>Prepare for your interview by practicing aptitude tests.</p>
-        <ul>
-            <li><a href="https://www.khanacademy.org/">Khan Academy</a> - Offers free practice exercises and instructional videos.</li>
-            <li><a href="https://www.mba.com/exam-prep/gmat-official-starter-kit-practice-exams-1-and-2-free">GMAT Official Practice</a> - Access free GMAT practice exams.</li>
-            <li><a href="https://www.shldirect.com/en/practice-tests">SHL Practice Tests</a> - Provides a range of practice tests.</li>
-            <li><a href="https://www.psychometric-success.com/">Psychometric Success</a> - Offers a variety of practice tests and resources.</li>
-        </ul>
-    </div>
+    <!--====== HEADER PART START ======-->
+    <header class="header-area">
+        <div class="navbar-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="assets/images/logo.png" alt="Logo">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                                <span class="toggler-icon"></span>
+                            </button>
 
-    <div class="card">
-        <h2>Podcasts</h2>
-        <p>Listen to podcasts for valuable insights and tips.</p>
-        <ul>
-            <li><a href="https://www.manager-tools.com/">Career Tools</a> - Practical advice and tips for advancing in your career.</li>
-            <li><a href="https://tim.blog/podcast/">The Tim Ferriss Show</a> - Features interviews with top performers.</li>
-            <li><a href="https://hbr.org/2019/01/podcast-ideacast">HBR IdeaCast</a> - Interviews with industry experts.</li>
-            <li><a href="https://theartofcharm.com/podcast/">The Art of Charm</a> - Focuses on personal development and communication skills.</li>
-        </ul>
-    </div>
+                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                                <ul id="nav" class="navbar-nav ml-auto">
+                                    <li class="nav-item">
+                                        <a href="index.html">Home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="calander.html">Calendar</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="jobs.html">Jobs</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a href="resource.html">Resource</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="contact.html">Contact</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="faq.html">FAQ</a>
+                                    </li>
+                                    <li class="nav-item" id="loginSignup">
+                                        <a class="btn btn-success ml-4" href="login.html">Login/Signup</a>
+                                    </li>
+                                    <li class="nav-item" id="userInfo" style="display: none;">
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <i class="fa fa-user-circle"></i> <span id="userEmail"></span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="profile.html">Profile</a>
+                                                <a class="dropdown-item" href="#" onclick="logout()">Logout</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div> <!-- navbar collapse -->
+                        </nav> <!-- navbar -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- navbar area -->
+    </header>
+    <!--====== HEADER PART ENDS ======-->
 
-    <div class="card">
-        <h2>Interview Questions</h2>
-        <p>Prepare for your interview by reviewing common interview questions.</p>
-        <ul>
-            <li><a href="https://www.themuse.com/advice/interview-questions-to-ask">The Muse - Interview Questions to Ask</a> - Comprehensive list of interview questions.</li>
-            <li><a href="https://www.glassdoor.com/Interview/index.htm">Glassdoor - Interview Questions and Reviews</a> - Access interview questions shared by candidates.</li>
-            <li><a href="https://www.themuse.com/advice/how-to-answer-the-31-most-common-interview-questions">The Muse - How to Answer the 31 Most Common Interview Questions</a> - Tips on answering common interview questions.</li>
-            <li><a href="https://www.monster.com/career-advice/article/100-potential-interview-questions">Monster - 100 Potential Interview Questions</a> - A wide range of interview questions across different industries.</li>
-        </ul>
-    </div>
+    <!-- Resource Section Start -->
+    <section class="resource-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Career Resources</h2>
+                <p>Discover tools and resources to help you succeed in your job search and career development</p>
+            </div>
 
-    <div class="card">
-        <h2>Recommended Books</h2>
-        <p>Explore books that offer valuable insights for interview preparation and career development.</p>
-        <ul>
-            <li><a href="https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850">Cracking the Coding Interview</a> by Gayle Laakmann McDowell - Essential for software engineering interviews.</li>
-            <li><a href="https://www.amazon.com/Case-Point-10th-Interview-Preparation/dp/0986370732">Case in Point: Complete Case Interview Preparation</a> by Marc P. Cosentino - Ideal for consulting interviews.</li>
-            <li><a href="https://www.amazon.com/How-Win-Friends-Influence-People/dp/0671027034">How to Win Friends and Influence People</a> by Dale Carnegie - Classic book on interpersonal skills and communication.</li>
-            <li><a href="https://www.amazon.com/What-Color-Your-Parachute-2021/dp/1984857861">What Color Is Your Parachute? 2021: Your Guide to a Lifetime of Meaningful Work and Career Success</a> by Richard N. Bolles - Offers guidance on career exploration and job search strategies.</li>
-        </ul>
-    </div>
+            <div class="row">
+                <!-- Aptitude Tests -->
+                <div class="col-lg-6">
+                    <div class="resource-category">
+                        <h3><i class="fa fa-check-square-o"></i> Aptitude Tests</h3>
+                        <p>Practice tests to help you prepare for job assessments</p>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.practiceaptitudetests.com/" target="_blank"><i class="fa fa-external-link"></i> Practice Aptitude Tests</a>
+                                <div class="resource-description">Free aptitude tests with detailed solutions and explanations</div>
+                            </li>
+                            <li>
+                                <a href="https://www.assessmentday.co.uk/" target="_blank"><i class="fa fa-external-link"></i> Assessment Day</a>
+                                <div class="resource-description">Numerical, verbal, and diagrammatic reasoning tests</div>
+                            </li>
+                            <li>
+                                <a href="https://www.jobtestprep.com/" target="_blank"><i class="fa fa-external-link"></i> JobTestPrep</a>
+                                <div class="resource-description">Company-specific assessment preparations</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
 
-    <div class="card">
-        <h2>Online Courses</h2>
-        <p>Enroll in online courses to enhance your skills and knowledge.</p>
-        <ul>
-            <li><a href="https://www.udemy.com/courses/search/?q=interview%20preparation">Udemy - Interview Preparation Courses</a> - Offers a variety of courses on interview techniques and skills.</li>
-            <li><a href="https://www.coursera.org/courses?query=interview%20preparation">Coursera - Interview Preparation Courses</a> - Explore courses from top universities and institutions.</li>
-            <li><a href="https://www.linkedin.com/learning/topics/interviewing">LinkedIn Learning - Interviewing</a> - Features courses on interview preparation, techniques, and strategies.</li>
-            <li><a href="https://www.skillshare.com/browse/interview-preparation">Skillshare - Interview Preparation</a> - Access classes covering interview tips, resume writing, and more.</li>
-        </ul>
-    </div>
+                <!-- Career Podcasts -->
+                <div class="col-lg-6">
+                    <div class="resource-category">
+                        <h3><i class="fa fa-microphone"></i> Career Podcasts</h3>
+                        <p>Listen to career advice and inspiration from industry experts</p>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://findingbrave.org/podcast/" target="_blank"><i class="fa fa-external-link"></i> Finding Brave</a>
+                                <div class="resource-description">Career growth and personal development insights</div>
+                            </li>
+                            <li>
+                                <a href="https://www.manager-tools.com/all-podcasts" target="_blank"><i class="fa fa-external-link"></i> Manager Tools</a>
+                                <div class="resource-description">Management and leadership skills development</div>
+                            </li>
+                            <li>
+                                <a href="https://www.careerclouds.com/podcasts" target="_blank"><i class="fa fa-external-link"></i> Career Clouds</a>
+                                <div class="resource-description">Job search strategies and interview tips</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Interview Questions -->
+                <div class="col-lg-6">
+                    <div class="resource-category">
+                        <h3><i class="fa fa-comments"></i> Interview Questions</h3>
+                        <p>Prepare for your interviews with commonly asked questions</p>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.glassdoor.com/Interview/index.htm" target="_blank"><i class="fa fa-external-link"></i> Glassdoor Interview Questions</a>
+                                <div class="resource-description">Company-specific interview questions and experiences</div>
+                            </li>
+                            <li>
+                                <a href="https://www.themuse.com/advice/interview-questions-and-answers" target="_blank"><i class="fa fa-external-link"></i> The Muse</a>
+                                <div class="resource-description">Sample answers to common interview questions</div>
+                            </li>
+                            <li>
+                                <a href="https://www.indeed.com/career-advice/interviewing" target="_blank"><i class="fa fa-external-link"></i> Indeed Interview Resources</a>
+                                <div class="resource-description">Comprehensive guides on different interview types</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Career Books -->
+                <div class="col-lg-6">
+                    <div class="resource-category">
+                        <h3><i class="fa fa-book"></i> Recommended Books</h3>
+                        <p>Must-read books for career development and job search</p>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.amazon.com/What-Color-Your-Parachute-2020/dp/1984856561/" target="_blank"><i class="fa fa-external-link"></i> What Color Is Your Parachute?</a>
+                                <div class="resource-description">Classic job search and career advice guide</div>
+                            </li>
+                            <li>
+                                <a href="https://www.amazon.com/So-Good-They-Cant-Ignore/dp/1455509124/" target="_blank"><i class="fa fa-external-link"></i> So Good They Can't Ignore You</a>
+                                <div class="resource-description">Why skills trump passion in the quest for work you love</div>
+                            </li>
+                            <li>
+                                <a href="https://www.amazon.com/Designing-Your-Life-Well-Lived-Joyful/dp/1101875321/" target="_blank"><i class="fa fa-external-link"></i> Designing Your Life</a>
+                                <div class="resource-description">How to build a well-lived, joyful life</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Online Courses -->
+                <div class="col-lg-6">
+                    <div class="resource-category">
+                        <h3><i class="fa fa-graduation-cap"></i> Online Courses</h3>
+                        <p>Expand your skills with these online learning platforms</p>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.coursera.org/" target="_blank"><i class="fa fa-external-link"></i> Coursera</a>
+                                <div class="resource-description">University courses and professional certificates</div>
+                            </li>
+                            <li>
+                                <a href="https://www.udemy.com/" target="_blank"><i class="fa fa-external-link"></i> Udemy</a>
+                                <div class="resource-description">Practical skills training in various domains</div>
+                            </li>
+                            <li>
+                                <a href="https://www.linkedin.com/learning/" target="_blank"><i class="fa fa-external-link"></i> LinkedIn Learning</a>
+                                <div class="resource-description">Business, creative, and technology courses</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Resume Tools -->
+                <div class="col-lg-6">
+                    <div class="resource-category">
+                        <h3><i class="fa fa-file-text-o"></i> Resume Tools</h3>
+                        <p>Create and optimize your resume with these tools</p>
+                        <ul class="resource-list">
+                            <li>
+                                <a href="https://www.resumegenius.com/" target="_blank"><i class="fa fa-external-link"></i> Resume Genius</a>
+                                <div class="resource-description">Resume templates and builder with expert tips</div>
+                            </li>
+                            <li>
+                                <a href="https://novoresume.com/" target="_blank"><i class="fa fa-external-link"></i> Novoresume</a>
+                                <div class="resource-description">Modern resume templates with ATS-friendly designs</div>
+                            </li>
+                            <li>
+                                <a href="https://www.jobscan.co/" target="_blank"><i class="fa fa-external-link"></i> Jobscan</a>
+                                <div class="resource-description">Resume optimization for Applicant Tracking Systems</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Resource Section End -->
+
+    <!--====== FOOTER PART START ======-->
+
+    <footer class="footer_area gray-bg">
+        <div class="footer_widget pt-30 pb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">Quick Links</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">For Candidates</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">For Employers</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_contact mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">Contact Us</h5>
+                            </div>
+                            <ul class="contact">
+                                <li>
+                                    <p><span>Location: </span> 2750 Quadra Street Victoria, Canada</p>
+                                </li>
+                                <li>
+                                    <p><span>Email: </span> info.jobs@example.com</p>
+                                </li>
+                                <li>
+                                    <p><span>Phone: </span> +880-1234-515</p>
+                                </li>
+                            </ul>
+                            <ul class="social">
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- footer widget -->
+
+        <div class="footer_copyright">
+            <div class="container">
+                <div class="copyright_content text-center d-sm-flex justify-content-between align-items-center">
+                    <a href="#" class="logo">CareerCanvas</a>
+                    <p class="copyright">CareerCanvas © 2024 All Right Reserved</p>
+                </div> <!-- copyright content -->
+            </div> <!-- container -->
+        </div> <!-- footer copyright -->
+    </footer>
+
+    <!--====== FOOTER PART ENDS ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== Jquery js ======-->
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!--====== Main js ======-->
+    <script src="assets/js/main.js"></script>
+    <script src="index.js"></script>
+
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            try {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                const userInfo = document.getElementById('userInfo');
+                const loginSignup = document.getElementById('loginSignup');
+                const userEmail = document.getElementById('userEmail');
+
+                if (currentUser && currentUser.email) {
+                    if (userInfo && loginSignup) {
+                        userInfo.style.display = 'flex';
+                        loginSignup.style.display = 'none';
+                        if (userEmail) {
+                            userEmail.textContent = currentUser.email;
+                        }
+                    }
+                } else {
+                    if (userInfo && loginSignup) {
+                        userInfo.style.display = 'none';
+                        loginSignup.style.display = 'flex';
+                    }
+                }
+            } catch (error) {
+                console.error("Error checking authentication:", error);
+                // If there's an error, default to logged out state
+                const userInfo = document.getElementById('userInfo');
+                const loginSignup = document.getElementById('loginSignup');
+                if (userInfo && loginSignup) {
+                    userInfo.style.display = 'none';
+                    loginSignup.style.display = 'flex';
+                }
+            }
+        }
+
+        // Logout function
+        function logout() {
+            try {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error("Error during logout:", error);
+                alert("Logout failed. Please try again.");
+            }
+        }
+
+        // Check auth status when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuth();
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,670 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <!--====== Title ======-->
+    <title>CareerCanvas | Job Details</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
+
+    <!--====== Flaticon CSS ======-->
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+
+    <!--====== Font Awesome CSS ======-->
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <!--====== Nice Select CSS ======-->
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+
+    <!--====== Bootstrap CSS ======-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <!--====== Default CSS ======-->
+    <link rel="stylesheet" href="assets/css/default.css">
+
+    <!--====== Style CSS ======-->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        .job-details-section {
+            padding: 80px 0;
+        }
+        .job-header {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+        }
+        .job-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-right: 25px;
+        }
+        .job-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .job-title {
+            margin: 0 0 10px 0;
+            font-size: 28px;
+            font-weight: 600;
+            color: #333;
+        }
+        .job-company {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .job-meta {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .job-meta-item {
+            display: inline-flex;
+            align-items: center;
+            margin-right: 25px;
+            margin-bottom: 10px;
+            color: #666;
+        }
+        .job-meta-item i {
+            margin-right: 8px;
+            color: #0067da;
+        }
+        .job-content {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .job-section {
+            margin-bottom: 30px;
+        }
+        .job-section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .job-description p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        .job-requirements ul, .job-responsibilities ul {
+            padding-left: 20px;
+        }
+        .job-requirements li, .job-responsibilities li {
+            margin-bottom: 10px;
+            line-height: 1.7;
+        }
+        .apply-section {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .apply-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        textarea.form-control {
+            min-height: 150px;
+        }
+        .file-input {
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        .file-input input[type="file"] {
+            position: absolute;
+            font-size: 100px;
+            opacity: 0;
+            right: 0;
+            top: 0;
+            cursor: pointer;
+        }
+        .file-label {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .file-name {
+            display: inline-block;
+            font-size: 14px;
+            color: #666;
+        }
+        .similar-jobs {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .similar-job-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .similar-job-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .similar-job-item:last-child {
+            border-bottom: none;
+        }
+        .similar-job-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        .similar-job-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .similar-job-info h4 {
+            margin: 0 0 5px 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .similar-job-info p {
+            margin: 0 0 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        .apply-login-message {
+            text-align: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <!--[if IE]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+    <![endif]-->
+    
+   
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--====== PRELOADER PART ENDS ======-->
+
+    <!--====== HEADER PART START ======-->
+
+    <header class="header-area header_shadow">
+        <div class="header-navbar">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg">
+                    <a class="navbar-brand" href="index.html">CareerCanvas</a>
+                    
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="toggler-icon"></span>
+                        <span class="toggler-icon"></span>
+                        <span class="toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="calander.html">Calander</a></li>
+                            <li class="active"><a href="jobs.html">Jobs</a></li>
+                            <li><a href="resource.html">Resource</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li class="profile-section" id="profileSection">
+                                <div class="user-info" id="userInfo" style="display: none;">
+                                    <span id="userEmail" style="color: #526d82; margin-right: 10px;"></span>
+                                    <a href="profile.html" class="profile-link" style="color: #526d82; text-decoration: none; margin-right: 10px;">Profile</a>
+                                    <button onclick="logout()" class="logout-btn" style="background: none; border: none; color: #526d82; cursor: pointer;">Logout</button>
+                                </div>
+                                <div class="login-signup" id="loginSignup">
+                                    <a href="login.html" class="login-btn" style="color: #526d82; text-decoration: none; margin-right: 10px;">Login</a>
+                                    <a href="login.html" class="signup-btn" style="color: #526d82; text-decoration: none;">Sign Up</a>
+                                </div>
+                            </li>
+                        </ul> <!-- navbar nav -->
+                    </div>
+                </nav>
+            </div> <!-- container -->
+        </div> <!-- header navbar -->
+    </header>
+
+    <!--====== HEADER PART ENDS ======-->
+
+    <!--====== JOB DETAILS PART START ======-->
+
+    <section class="job-details-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Job Header -->
+                    <div class="job-header">
+                        <div class="job-logo">
+                            <img src="assets/images/jobs-1.jpg" alt="Company Logo">
+                        </div>
+                        <div>
+                            <h1 class="job-title">Senior UX Designer</h1>
+                            <p class="job-company">Hooli</p>
+                            <div class="job-meta">
+                                <span class="job-meta-item"><i class="fa fa-map-marker"></i> San Francisco, CA</span>
+                                <span class="job-meta-item"><i class="fa fa-clock-o"></i> Full Time</span>
+                                <span class="job-meta-item"><i class="fa fa-briefcase"></i> Senior Level</span>
+                                <span class="job-meta-item"><i class="fa fa-money"></i> $120,000 - $150,000</span>
+                                <span class="job-meta-item"><i class="fa fa-calendar"></i> Posted 3 days ago</span>
+                            </div>
+                            <a href="#apply-section" class="main-btn">Apply Now</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Job Content -->
+                    <div class="job-content">
+                        <div class="job-section job-description">
+                            <h3 class="job-section-title">Job Description</h3>
+                            <p>Hooli is looking for a Senior UX Designer to join our product team. As a Senior UX Designer, you will play a crucial role in shaping the user experience of our flagship product. You'll collaborate with product managers, engineers, and other designers to create intuitive and engaging user interfaces.</p>
+                            <p>This position requires a deep understanding of user-centered design principles, strong visual design skills, and the ability to translate complex requirements into simple, elegant solutions. The ideal candidate will have experience designing for web and mobile applications, with a portfolio that demonstrates a thoughtful approach to problem-solving.</p>
+                        </div>
+                        
+                        <div class="job-section job-responsibilities">
+                            <h3 class="job-section-title">Responsibilities</h3>
+                            <ul>
+                                <li>Lead the design process from concept to implementation, including user research, wireframing, prototyping, and visual design</li>
+                                <li>Collaborate with product managers to define product requirements and develop user-centered design solutions</li>
+                                <li>Work closely with engineering teams to ensure design implementation meets quality standards</li>
+                                <li>Conduct user testing and incorporate feedback into design iterations</li>
+                                <li>Create and maintain design systems and pattern libraries</li>
+                                <li>Mentor junior designers and provide constructive feedback</li>
+                                <li>Stay current with UX trends, tools, and best practices</li>
+                                <li>Advocate for user needs throughout the product development cycle</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="job-section job-requirements">
+                            <h3 class="job-section-title">Requirements</h3>
+                            <ul>
+                                <li>5+ years of experience in UX/UI design, preferably for web and mobile applications</li>
+                                <li>Strong portfolio demonstrating user-centered design process and problem-solving abilities</li>
+                                <li>Proficiency in design tools such as Figma, Sketch, Adobe XD, or similar</li>
+                                <li>Experience with prototyping tools (InVision, Principle, Framer, etc.)</li>
+                                <li>Excellent visual design skills with a keen eye for detail</li>
+                                <li>Strong communication and presentation skills</li>
+                                <li>Ability to work effectively in cross-functional teams</li>
+                                <li>Bachelor's degree in Design, HCI, or a related field (or equivalent experience)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="job-section job-benefits">
+                            <h3 class="job-section-title">Benefits</h3>
+                            <ul>
+                                <li>Competitive salary range ($120,000 - $150,000) based on experience</li>
+                                <li>Comprehensive health, dental, and vision insurance</li>
+                                <li>401(k) matching program</li>
+                                <li>Flexible work hours and remote work options</li>
+                                <li>Generous paid time off policy</li>
+                                <li>Professional development budget</li>
+                                <li>Employee stock option plan</li>
+                                <li>Modern office in downtown San Francisco with snacks, meals, and recreational activities</li>
+                                <li>Regular team outings and events</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Apply Section -->
+                    <div class="apply-section" id="apply-section">
+                        <h3 class="apply-title">Apply for this Job</h3>
+                        
+                        <div id="loginMessage" class="apply-login-message" style="display: none;">
+                            <p>Please <a href="login.html">log in</a> or <a href="login.html">create an account</a> to apply for this job.</p>
+                        </div>
+                        
+                        <form id="applyForm" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Phone</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Resume/CV</label>
+                                <div class="file-input">
+                                    <span class="file-label">Choose File</span>
+                                    <span class="file-name" id="fileName">No file chosen</span>
+                                    <input type="file" id="resume" accept=".pdf,.doc,.docx">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Cover Letter</label>
+                                <textarea class="form-control" id="coverLetter" rows="5" placeholder="Write a cover letter explaining why you're a good fit for this position..."></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">LinkedIn Profile (Optional)</label>
+                                <input type="url" class="form-control" id="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Portfolio Website (Optional)</label>
+                                <input type="url" class="form-control" id="portfolio" placeholder="https://yourportfolio.com">
+                            </div>
+                            
+                            <button type="submit" class="main-btn">Submit Application</button>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4">
+                    <!-- Similar Jobs -->
+                    <div class="similar-jobs">
+                        <h3 class="similar-job-title">Similar Jobs</h3>
+                        
+                        <div class="similar-job-item">
+                            <div class="similar-job-logo">
+                                <img src="assets/images/jobs-2.jpg" alt="Company Logo">
+                            </div>
+                            <div class="similar-job-info">
+                                <h4>UI/UX Designer</h4>
+                                <p>PiedPiper</p>
+                                <p><i class="fa fa-map-marker"></i> Remote <i class="fa fa-clock-o"></i> Full Time</p>
+                                <a href="job-details.html" class="btn btn-sm btn-outline-primary mt-2">View Job</a>
+                            </div>
+                        </div>
+                        
+                        <div class="similar-job-item">
+                            <div class="similar-job-logo">
+                                <img src="assets/images/jobs-3.jpg" alt="Company Logo">
+                            </div>
+                            <div class="similar-job-info">
+                                <h4>Product Designer</h4>
+                                <p>Raviga Capital</p>
+                                <p><i class="fa fa-map-marker"></i> New York <i class="fa fa-clock-o"></i> Full Time</p>
+                                <a href="job-details.html" class="btn btn-sm btn-outline-primary mt-2">View Job</a>
+                            </div>
+                        </div>
+                        
+                        <div class="similar-job-item">
+                            <div class="similar-job-logo">
+                                <img src="assets/images/jobs-4.jpg" alt="Company Logo">
+                            </div>
+                            <div class="similar-job-info">
+                                <h4>Senior Design Lead</h4>
+                                <p>Endframe</p>
+                                <p><i class="fa fa-map-marker"></i> Boston <i class="fa fa-clock-o"></i> Full Time</p>
+                                <a href="job-details.html" class="btn btn-sm btn-outline-primary mt-2">View Job</a>
+                            </div>
+                        </div>
+                        
+                        <div class="similar-job-item">
+                            <div class="similar-job-logo">
+                                <img src="assets/images/jobs-5.jpg" alt="Company Logo">
+                            </div>
+                            <div class="similar-job-info">
+                                <h4>UX Researcher</h4>
+                                <p>Palo Alto Electric</p>
+                                <p><i class="fa fa-map-marker"></i> Palo Alto <i class="fa fa-clock-o"></i> Full Time</p>
+                                <a href="job-details.html" class="btn btn-sm btn-outline-primary mt-2">View Job</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Company Info -->
+                    <div class="job-content mt-4">
+                        <h3 class="job-section-title">About Hooli</h3>
+                        <p>Hooli is a leading technology company specializing in innovative software solutions for businesses worldwide. Our mission is to create products that make people's work lives more productive, enjoyable, and connected.</p>
+                        <p>Founded in 2010, we've grown to over 500 employees across 5 global offices. Our work culture emphasizes creativity, collaboration, and continuous learning.</p>
+                        <a href="#" class="btn btn-outline-primary mt-3">Visit Company Website</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--====== JOB DETAILS PART ENDS ======-->
+
+    <!--====== FOOTER PART START ======-->
+
+    <footer class="footer_area gray-bg">
+        <div class="footer_widget pt-30 pb-80">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">Quick Links</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">For Candidates</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_link mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">For Employers</h5>
+                            </div>
+                            <ul class="link">
+                                <li><a href="#">Job Packages</a></li>
+                                <li><a href="#">Post New Job</a></li>
+                                <li><a href="#">Jobs Listing</a></li>
+                                <li><a href="#">Jobs Style Grid</a></li>
+                                <li><a href="#">Employer Listing</a></li>
+                                <li><a href="#">Employers Grid</a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="footer_contact mt-45">
+                            <div class="footer_title">
+                                <h5 class="title">Contact Us</h5>
+                            </div>
+                            <ul class="contact">
+                                <li>
+                                    <p><span>Location: </span> 2750 Quadra Street Victoria, Canada</p>
+                                </li>
+                                <li>
+                                    <p><span>Email: </span> info.jobs@example.com</p>
+                                </li>
+                                <li>
+                                    <p><span>Phone: </span> +880-1234-515</p>
+                                </li>
+                            </ul>
+                            <ul class="social">
+                                <li><a href="#"><i class="fa fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            </ul>
+                        </div> <!-- footer link -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+        </div> <!-- footer widget -->
+
+        <div class="footer_copyright">
+            <div class="container">
+                <div class="copyright_content text-center d-sm-flex justify-content-between align-items-center">
+                    <a href="#" class="logo">CareerCanvas</a>
+                    <p class="copyright">CareerCanvas © 2024 All Right Reserved</p>
+                </div> <!-- copyright content -->
+            </div> <!-- container -->
+        </div> <!-- footer copyright -->
+    </footer>
+
+    <!--====== FOOTER PART ENDS ======-->
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== Jquery js ======-->
+    <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
+
+    <!--====== Bootstrap js ======-->
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <!--====== Nice Select js ======-->
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+
+    <!--====== Counter Up js ======-->
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.js"></script>
+
+    <!--====== Main js ======-->
+    <script src="assets/js/main.js"></script>
+    <script src="index.js"></script>
+
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const userInfo = document.getElementById('userInfo');
+            const loginSignup = document.getElementById('loginSignup');
+            const userEmail = document.getElementById('userEmail');
+            const loginMessage = document.getElementById('loginMessage');
+            const applyForm = document.getElementById('applyForm');
+
+            if (currentUser) {
+                userInfo.style.display = 'flex';
+                loginSignup.style.display = 'none';
+                userEmail.textContent = currentUser.email;
+                
+                // Show application form for logged in users
+                loginMessage.style.display = 'none';
+                applyForm.style.display = 'block';
+                
+                // Pre-fill form with user data if available
+                document.getElementById('fullName').value = currentUser.fullName || '';
+                document.getElementById('email').value = currentUser.email || '';
+                document.getElementById('phone').value = currentUser.phone || '';
+            } else {
+                userInfo.style.display = 'none';
+                loginSignup.style.display = 'flex';
+                
+                // Show login message for non-logged in users
+                loginMessage.style.display = 'block';
+                applyForm.style.display = 'none';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        // File input display
+        document.getElementById('resume').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : "No file chosen";
+            document.getElementById('fileName').textContent = fileName;
+        });
+
+        // Job application form submission
+        document.getElementById('applyForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to a server
+            alert('Your application has been submitted successfully!');
+            
+            // In a real application, you would handle the file upload and form submission
+            // For now, we'll just redirect back to the jobs page
+            setTimeout(function() {
+                window.location.href = 'jobs.html';
+            }, 1000);
+        });
+
+        // Check auth status when page loads
+        window.onload = checkAuth;
+    </script>
+</body>
+
+</html> 
